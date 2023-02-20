@@ -1,0 +1,42 @@
+
+.menu-block{
+
+    &__title{
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 15px;
+    }
+    &__separator{
+        display: block;
+        margin: 10px 0;
+        height: 1px;
+        width: calc(100% + 20px);
+        position: relative;
+        /*right: -0px;*/
+        background: #c0c0c0;
+    }
+    ul {
+        li {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            max-width: 240px;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 10px;
+            i{
+                margin-right: 10px;
+            }
+            a{
+                opacity: .5;
+                transition: all 0.3s linear;
+                white-space: nowrap;
+                &:hover{
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}
+
+
