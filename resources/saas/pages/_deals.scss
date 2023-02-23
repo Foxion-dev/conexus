@@ -1,0 +1,22 @@
+.deal-form{
+    max-width: 450px;
+    &__type{
+        margin-bottom: 10px;
+    }
+    &__type-result{
+        text-transform: uppercase;
+        text-align: center;
+    }
+}
+.deal-calculator{
+    margin: 30px 0;
+    &__result{
+        display: none;
+        &.show{
+            display: block;
+        }
+    }
+    &__btn{
+        margin: 0 auto 15px;
+    }
+}

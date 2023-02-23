@@ -179,11 +179,16 @@ td, th {
   padding: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 html, body {
   background-color: #222;
   height: 100%;
   font-size: 18px;
   color: #fff;
+  box-sizing: border-box;
 }
 
 body {
@@ -210,6 +215,7 @@ main:not([class]) {
 }
 
 .container {
+  padding: 30px;
   max-width: 1200px;
   width: 100%;
   margin: 0 auto;
@@ -259,6 +265,85 @@ i {
   color: #000;
 }
 
+.default-form {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  width: 100%;
+  color: #1a202c;
+  margin-bottom: 10px;
+}
+.form-input label {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+}
+.form-input input {
+  border: 2px solid transparent;
+  border-radius: 5px;
+  max-width: 100%;
+  width: 100%;
+  height: 45px;
+  background: #e3e3e3;
+  padding: 5px 15px;
+}
+.form-input input:focus {
+  outline: none;
+  border: 2px solid #000;
+}
+.form-input input[type=checkbox] {
+  max-width: 25px;
+  height: 25px;
+}
+.form-input input:disabled, .form-input input.disabled {
+  background: #918f8f;
+  pointer-events: none;
+}
+.form-input input.is-invalid {
+  border: 2px solid red;
+}
+.form-input select {
+  background: #e3e3e3;
+  max-width: 100%;
+  width: 100%;
+  height: 45px;
+}
+.form-input select.is-invalid {
+  border: 2px solid red;
+}
+.form-input textarea {
+  background: #e3e3e3;
+  max-width: 100%;
+  width: 100%;
+  height: 100px;
+}
+.form-input textarea:focus {
+  outline: none;
+  border: 2px solid #000;
+}
+.form-input textarea.is-invalid {
+  border: 2px solid red;
+}
+.form-input button {
+  color: #fff;
+}
+.flex-body {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
 .menu-block__title {
   font-size: 20px;
   font-weight: 700;
@@ -298,25 +383,6 @@ i {
   width: 100%;
 }
 
-.form-input {
-  display: flex;
-  flex-direction: column;
-}
-.form-input label {
-  margin-bottom: 10px;
-  font-size: 18px;
-  font-weight: 700;
-}
-.form-input input {
-  background: #fff;
-  height: 30px;
-  border: 1px solid gray;
-  border-radius: 5px;
-  max-width: 100%;
-  width: 100%;
-  color: #1a202c;
-}
-
 .auth-form {
   display: flex;
   flex-direction: column;
@@ -340,7 +406,6 @@ i {
 }
 
 .dashboard {
-  padding: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -383,7 +448,7 @@ i {
   margin-bottom: 30px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.31);
-  padding-bottom: 20px;
+  padding: 0 20px 20px;
 }
 .operations__title {
   font-size: 24px;
@@ -393,7 +458,7 @@ i {
 }
 .operations__grid-titles, .operations__grid-row {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(9, 1fr);
   gap: 15px;
   text-align: center;
 }
@@ -401,7 +466,27 @@ i {
   margin-bottom: 20px;
 }
 
-.test {
+.deal-form {
+  max-width: 450px;
+}
+.deal-form__type {
+  margin-bottom: 10px;
+}
+.deal-form__type-result {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.deal-calculator {
+  margin: 30px 0;
+}
+.deal-calculator__result {
+  display: none;
+}
+.deal-calculator__result.show {
   display: block;
+}
+.deal-calculator__btn {
+  margin: 0 auto 15px;
 }
 

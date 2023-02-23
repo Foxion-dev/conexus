@@ -6,7 +6,7 @@
 
         <ul>
             <li><i class="fa-solid fa-bolt"></i> <a href="{{ route('index.index') }}">  Главная</a></li>
-            <li><i class="fa-solid fa-plus"></i><a href="">Новая сделка</a></li>
+            <li><i class="fa-solid fa-plus"></i><a href="{{ route('deal.create') }}">Новая сделка</a></li>
             <li><i class="fa-solid fa-minus"></i><a href="">Новый расход</a></li>
             <li><i class="fa-solid fa-cash-register"></i><a href="">Инкассация</a></li>
             <li><i class="fa-solid fa-clock-rotate-left"></i><a href="">История</a></li>

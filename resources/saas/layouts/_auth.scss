@@ -2,25 +2,7 @@
     width: 100%;
 }
 
-.form-input{
-    display: flex;
-    flex-direction: column;
 
-    label{
-        margin-bottom: 10px;
-        font-size: 18px;
-        font-weight: 700;
-    }
-    input{
-        background: #fff;
-        height: 30px;
-        border: 1px solid gray;
-        border-radius: 5px;
-        max-width: 100%;
-        width: 100%;
-        color: #1a202c;
-    }
-}
 .auth-form{
     display: flex;
     flex-direction: column;

@@ -28,9 +28,9 @@ class HomeController extends Controller
 
         $data = [];
 
-        $data['deals'] = Deal::all();
+        $data['deals'] = Deal::latest()->take(3)->get();
         $data['clients'] = Client::all();
-
+//        dd($data['deals']);
         return view('dashboard', compact('data'));
 
     }

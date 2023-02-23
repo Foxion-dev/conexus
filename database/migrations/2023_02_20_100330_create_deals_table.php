@@ -20,8 +20,11 @@ class CreateDealsTable extends Migration
             $table->unsignedBigInteger('receiving_sum')->nullable(); // сумма получения
             $table->unsignedBigInteger('return_sum')->nullable(); // сумма отдачи
             $table->unsignedFloat('commission')->nullable(); // комиссия
+            $table->unsignedBigInteger('commission_sum')->nullable(); // сумма комиссии
             $table->unsignedBigInteger('receiving_currency_id')->nullable(); // валюта получения
             $table->unsignedBigInteger('return_currency_id')->nullable(); // валюта отдачи
+            $table->smallInteger('custom_commission')->nullable(); // кастомная комиссия
+            $table->smallInteger('commission_on')->nullable(); // "Включая комиссию"
             $table->timestamps();
 
             $table->softDeletes(); // подключаем "мягкое удаление"

@@ -15,12 +15,12 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('contact');
-            $table->string('person_photo');
-            $table->string('person_documents');
-            $table->text('comment');
-            $table->unsignedBigInteger('source_id');
+            $table->string('name')->nullable();
+            $table->string('contact')->nullable();
+            $table->string('person_photo')->nullable();
+            $table->string('person_documents')->nullable();
+            $table->text('comment')->nullable();
+            $table->unsignedBigInteger('source_id')->nullable();
             $table->timestamps();
 
             $table->softDeletes(); // подключаем "мягкое удаление"

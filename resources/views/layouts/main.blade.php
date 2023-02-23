@@ -12,7 +12,9 @@
     <body>
         @include('includes.sidebar')
         <main>
-            @yield('content')
+            <div class="container">
+                @yield('content')
+            </div>
         </main>
         <script src="https://kit.fontawesome.com/96e593092d.js" crossorigin="anonymous"></script>
         <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>

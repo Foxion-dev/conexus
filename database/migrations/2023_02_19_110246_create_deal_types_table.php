@@ -15,7 +15,7 @@ class CreateDealTypesTable extends Migration
     {
         Schema::create('deal_types', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->timestamps();
 
             $table->softDeletes(); // подключаем "мягкое удаление"

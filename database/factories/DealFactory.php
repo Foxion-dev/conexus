@@ -25,6 +25,9 @@ class DealFactory extends Factory
             'receiving_sum' => random_int(0, 100000),
             'return_sum' => random_int(0, 100000),
             'commission' => random_int(1,5),
+            'commission_sum' => random_int(0, 100000),
+            'custom_commission' => random_int(0, 1),
+            'commission_on' => random_int(0, 1),
             'receiving_currency_id' => Currency::get()->random()->id,
             'return_currency_id' => Currency::get()->random()->id,
         ];
