@@ -109,6 +109,10 @@ button, input, optgroup, select, textarea {
 
 button {
   overflow: visible;
+  background: transparent;
+  border: none;
+  outline: none;
+  display: block;
 }
 
 button, select {
@@ -272,6 +276,17 @@ i {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.default-form__row {
+  width: 100%;
+  margin-bottom: 30px;
+}
+.default-form__col {
+  max-width: 50%;
+  width: 100%;
+}
+.default-form__col + .default-form__col {
+  margin-left: 30px;
 }
 
 .form-input {
@@ -464,6 +479,10 @@ i {
 }
 .operations__grid-row {
   margin-bottom: 20px;
+}
+
+.actions i {
+  margin: 0;
 }
 
 .deal-form {

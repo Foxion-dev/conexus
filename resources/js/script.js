@@ -24,12 +24,12 @@ document.addEventListener("DOMContentLoaded", () => {
             const changeCustomReturnSum = this.changeReturnSum.bind(this);
             const changeCommissionValue = this.changeCommission.bind(this);
 
-            this.buttonCalc.addEventListener('click', calc)
-            this.customCommissionInput.addEventListener('input', changeCustomCommission)
-            this.commissionSumInput.addEventListener('input', changeCustomCommissionSum)
-            this.repaidSumInput.addEventListener('input', changeCustomReturnSum)
-            this.considerCommissionInput.addEventListener('input', changeModeCommission)
-            this.commissionInput.addEventListener('input', changeCommissionValue)
+            this.buttonCalc?.addEventListener('click', calc)
+            this.customCommissionInput?.addEventListener('input', changeCustomCommission)
+            this.commissionSumInput?.addEventListener('input', changeCustomCommissionSum)
+            this.repaidSumInput?.addEventListener('input', changeCustomReturnSum)
+            this.considerCommissionInput?.addEventListener('input', changeModeCommission)
+            this.commissionInput?.addEventListener('input', changeCommissionValue)
         },
         changeCommission(event){
             if(this.customCommission){

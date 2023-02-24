@@ -25,13 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        $data = [];
-
-        $data['deals'] = Deal::latest()->take(3)->get();
-        $data['clients'] = Client::all();
-//        dd($data['deals']);
-        return view('dashboard', compact('data'));
-
+        return redirect()->route('index');
     }
 }

@@ -2125,18 +2125,19 @@ document.addEventListener("DOMContentLoaded", function () {
     commissionMode: 'off',
     defaultCommission: 2,
     init: function init() {
+      var _this$buttonCalc, _this$customCommissio, _this$commissionSumIn, _this$repaidSumInput, _this$considerCommiss, _this$commissionInput;
       var calc = this.defaultCalculate.bind(this);
       var changeCustomCommission = this.changeCustom.bind(this);
       var changeModeCommission = this.changeMode.bind(this);
       var changeCustomCommissionSum = this.changeCommissionSum.bind(this);
       var changeCustomReturnSum = this.changeReturnSum.bind(this);
       var changeCommissionValue = this.changeCommission.bind(this);
-      this.buttonCalc.addEventListener('click', calc);
-      this.customCommissionInput.addEventListener('input', changeCustomCommission);
-      this.commissionSumInput.addEventListener('input', changeCustomCommissionSum);
-      this.repaidSumInput.addEventListener('input', changeCustomReturnSum);
-      this.considerCommissionInput.addEventListener('input', changeModeCommission);
-      this.commissionInput.addEventListener('input', changeCommissionValue);
+      (_this$buttonCalc = this.buttonCalc) === null || _this$buttonCalc === void 0 ? void 0 : _this$buttonCalc.addEventListener('click', calc);
+      (_this$customCommissio = this.customCommissionInput) === null || _this$customCommissio === void 0 ? void 0 : _this$customCommissio.addEventListener('input', changeCustomCommission);
+      (_this$commissionSumIn = this.commissionSumInput) === null || _this$commissionSumIn === void 0 ? void 0 : _this$commissionSumIn.addEventListener('input', changeCustomCommissionSum);
+      (_this$repaidSumInput = this.repaidSumInput) === null || _this$repaidSumInput === void 0 ? void 0 : _this$repaidSumInput.addEventListener('input', changeCustomReturnSum);
+      (_this$considerCommiss = this.considerCommissionInput) === null || _this$considerCommiss === void 0 ? void 0 : _this$considerCommiss.addEventListener('input', changeModeCommission);
+      (_this$commissionInput = this.commissionInput) === null || _this$commissionInput === void 0 ? void 0 : _this$commissionInput.addEventListener('input', changeCommissionValue);
     },
     changeCommission: function changeCommission(event) {
       if (this.customCommission) {

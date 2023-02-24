@@ -182,7 +182,7 @@ class DealController extends Controller
 
         $deal->delete();
 
-        return redirect()->route('deal.index');
+        return redirect()->route('index.index');
     }
 
     public function destroy(Deal $deal)
@@ -190,7 +190,7 @@ class DealController extends Controller
 
         $deal->delete();
 
-        return redirect()->route('deal.index');
+        return redirect()->route('index.index');
     }
 
     public function restore()
