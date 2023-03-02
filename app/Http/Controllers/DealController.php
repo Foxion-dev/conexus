@@ -7,9 +7,10 @@ use App\Models\Currency;
 use App\Models\Deal;
 use App\Models\DealType;
 use App\Models\Source;
+use App\Models\WorkDay;
 use Illuminate\Http\Request;
 
-class DealController extends Controller
+class DealController extends BaseController
 {
     public function index()
     {
@@ -23,8 +24,9 @@ class DealController extends Controller
         $clientSources = Source::all();
         $currencies = Currency::all();
         $dealTypes = DealType::all();
+        $workDay = WorkDay::find(auth()->user()->work_day_id);
 
-        return view('deal.create', compact('clients', 'clientSources', 'dealTypes'));
+        return view('deal.create', compact('clients', 'clientSources', 'dealTypes', 'currencies', 'workDay'));
     }
 
     public function store()
@@ -86,11 +88,12 @@ class DealController extends Controller
             'return_currency_id' => $returnCurrency->id ?? null,
             'custom_commission' => $customCommission ? 1 : 0,
             'commission_on' => $commissionOn ? 1 : 0,
+            'work_day_id' => auth()->user()->work_day_id,
         ];
 
         $deal = Deal::create($dealData);
 
-        return redirect()->route('index.index');
+        return redirect()->route('index');
     }
 
     public function show(Deal $deal)
@@ -100,14 +103,15 @@ class DealController extends Controller
 
     public function edit(Deal $deal)
     {
+
         $client = Client::find($deal->client_id);
         $clients = Client::all();
         $clientSources = Source::all();
         $currencies = Currency::all();
         $dealTypes = DealType::all();
+        $workDay = WorkDay::find(auth()->user()->work_day_id);
 
-        return view('deal.edit', compact('deal', 'clients','client', 'clientSources', 'currencies', 'dealTypes'));
-
+        return view('deal.edit', compact('deal','client', 'clients', 'clientSources', 'dealTypes', 'currencies', 'workDay'));
     }
 
     public function update(Deal $deal)
@@ -169,11 +173,12 @@ class DealController extends Controller
             'return_currency_id' => $returnCurrency->id ?? null,
             'custom_commission' => $customCommission ? 1 : 0,
             'commission_on' => $commissionOn ? 1 : 0,
+            'work_day_id' => auth()->user()->work_day_id,
         ];
 
         $deal->update($dealData);
 
-        return redirect()->route('index.index');
+        return redirect()->route('index');
 
     }
 
@@ -182,7 +187,7 @@ class DealController extends Controller
 
         $deal->delete();
 
-        return redirect()->route('index.index');
+        return redirect()->route('index');
     }
 
     public function destroy(Deal $deal)
@@ -190,7 +195,7 @@ class DealController extends Controller
 
         $deal->delete();
 
-        return redirect()->route('index.index');
+        return redirect()->route('index');
     }
 
     public function restore()
@@ -199,7 +204,7 @@ class DealController extends Controller
         $deal = Deal::withTrashed()->find(2);
         $deal->restore();
 
-        dd('restored');
+//        dd('restored');
     }
 
     // firstOrCreate - найти или создать

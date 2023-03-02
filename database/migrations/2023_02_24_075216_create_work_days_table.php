@@ -50,6 +50,11 @@ class CreateWorkDaysTable extends Migration
      */
     public function down()
     {
+        Schema::table('users', function (Blueprint $table) {
+
+            $table->dropForeign('user_work_day_fk');
+            $table->dropIndex('user_work_day_idx');
+        });
         Schema::dropIfExists('work_days');
     }
 }

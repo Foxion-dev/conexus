@@ -2,6 +2,21 @@
 @section('content')
     <form action="{{ route('deal.store') }}" method="post" class="default-form deal-form">
         @csrf
+        <div class="deal-form__commissions">
+            <input type="hidden" data-type="buy" data-from="0" data-value="{{ $workDay->commissionsBuy->from_0 }}">
+            <input type="hidden" data-type="buy" data-from="100" data-value="{{ $workDay->commissionsBuy->from_100 }}">
+            <input type="hidden" data-type="buy" data-from="1000" data-value="{{ $workDay->commissionsBuy->from_1000 }}">
+            <input type="hidden" data-type="buy" data-from="10000" data-value="{{ $workDay->commissionsBuy->from_10000 }}">
+            <input type="hidden" data-type="buy" data-from="50000" data-value="{{ $workDay->commissionsBuy->from_50000 }}">
+            <input type="hidden" data-type="buy" data-from="100000" data-value="{{ $workDay->commissionsBuy->from_100000 }}">
+
+            <input type="hidden" data-type="sale" data-from="0" data-value="{{ $workDay->commissionsSale->from_0 }}">
+            <input type="hidden" data-type="sale" data-from="100" data-value="{{ $workDay->commissionsSale->from_100 }}">
+            <input type="hidden" data-type="sale" data-from="1000" data-value="{{ $workDay->commissionsSale->from_1000 }}">
+            <input type="hidden" data-type="sale" data-from="10000" data-value="{{ $workDay->commissionsSale->from_10000 }}">
+            <input type="hidden" data-type="sale" data-from="50000" data-value="{{ $workDay->commissionsSale->from_50000 }}">
+            <input type="hidden" data-type="sale" data-from="100000" data-value="{{ $workDay->commissionsSale->from_100000 }}">
+        </div>
         <div class="form-input">
             <label for="deal_type_id">Тип сделки:</label>
             <select name="type_id" value="{{ old("type_id") }}" class="@error('type_id') is-invalid @enderror" >

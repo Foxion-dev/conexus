@@ -23,6 +23,7 @@ class CreateDealsTable extends Migration
             $table->unsignedBigInteger('commission_sum')->nullable(); // сумма комиссии
             $table->unsignedBigInteger('receiving_currency_id')->nullable(); // валюта получения
             $table->unsignedBigInteger('return_currency_id')->nullable(); // валюта отдачи
+            $table->unsignedBigInteger('work_day_id')->nullable(); // рабочий день
             $table->smallInteger('custom_commission')->nullable(); // кастомная комиссия
             $table->smallInteger('commission_on')->nullable(); // "Включая комиссию"
             $table->timestamps();
@@ -40,6 +41,9 @@ class CreateDealsTable extends Migration
 
             $table->index('return_currency_id', 'deal_return_currency_idx');
             $table->foreign('return_currency_id', 'deal_return_currency_fk')->on('currencies')->references('id');
+
+            $table->index('work_day_id', 'deal_work_day_idx');
+            $table->foreign('work_day_id', 'deal_work_day_fk')->on('work_days')->references('id');
         });
     }
 

@@ -22,17 +22,15 @@ Route::post('/step2', [App\Http\Controllers\WorkDayController::class, 'officeSet
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [App\Http\Controllers\IndexController::class, 'index'])->name('index');
 
-Route::resource('deal', \App\Http\Controllers\DealController::class);
+//Route::resource('deals', \App\Http\Controllers\DealController::class);
 
-
-
-//Route::get('/deals', [App\Http\Controllers\DealController::class, 'index'])->name('deal.index');
-//Route::get('/deals/create', [App\Http\Controllers\DealController::class, 'create'])->name('deal.create');
-//Route::post('deals', [App\Http\Controllers\DealController::class, 'store'])->name('deal.store');
-//Route::get('deals/{deal}', [App\Http\Controllers\DealController::class, 'show'])->name('deal.show');
-//Route::get('deals/{deal}/edit', [App\Http\Controllers\DealController::class, 'edit'])->name('deal.edit');
-//Route::patch('deals/{deal}', [App\Http\Controllers\DealController::class, 'update'])->name('deal.update');
-//Route::delete('deals/{deal}', [App\Http\Controllers\DealController::class, 'destroy'])->name('deal.destroy');
+Route::get('/deals', [App\Http\Controllers\DealController::class, 'index'])->name('deal.index');
+Route::get('/deals/create', [App\Http\Controllers\DealController::class, 'create'])->name('deal.create');
+Route::post('deals', [App\Http\Controllers\DealController::class, 'store'])->name('deal.store');
+Route::get('deals/{deal}', [App\Http\Controllers\DealController::class, 'show'])->name('deal.show');
+Route::get('deals/{deal}/edit', [App\Http\Controllers\DealController::class, 'edit'])->name('deal.edit');
+Route::patch('deals/{deal}', [App\Http\Controllers\DealController::class, 'update'])->name('deal.update');
+Route::delete('deals/{deal}', [App\Http\Controllers\DealController::class, 'destroy'])->name('deal.destroy');
 
 //Route::group(['namespace' => 'App\Http\Controllers\Deal'], function (){
 //

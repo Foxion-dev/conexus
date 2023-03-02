@@ -23,6 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const changeCustomCommissionSum = this.changeCommissionSum.bind(this);
             const changeCustomReturnSum = this.changeReturnSum.bind(this);
             const changeCommissionValue = this.changeCommission.bind(this);
+            const changeAmountValue = this.changeAmount.bind(this);
+            const changeTypeDealValue = this.changeTypeDeal.bind(this);
 
             this.buttonCalc?.addEventListener('click', calc)
             this.customCommissionInput?.addEventListener('input', changeCustomCommission)
@@ -30,6 +32,53 @@ document.addEventListener("DOMContentLoaded", () => {
             this.repaidSumInput?.addEventListener('input', changeCustomReturnSum)
             this.considerCommissionInput?.addEventListener('input', changeModeCommission)
             this.commissionInput?.addEventListener('input', changeCommissionValue)
+            this.amountInput?.addEventListener('input', changeAmountValue)
+            this.typeDealSelect?.addEventListener('input', changeTypeDealValue)
+        },
+        changeAmount(){
+            this.calculate(this.commissionInput.classList.value, this.commissionSumInput.classList.value, this.repaidSumInput.classList.value);
+        },
+        changeTypeDeal(){
+            this.setCommission();
+            this.calculate(this.commissionInput.classList.value, this.commissionSumInput.classList.value, this.repaidSumInput.classList.value);
+        },
+        setCommission(){
+
+            let typeDeal = +this.typeDealSelect.value;
+            let amount = +this.amountInput.value;
+
+            if(typeDeal === 1){ // продажа
+                if(amount > 0 && amount <= 100){
+                    this.defaultCommission = document.querySelector('input[data-type="sale"][data-from="0"]').getAttribute('data-value');
+                }else if(amount > 100 && amount <= 1000){
+                    this.defaultCommission = document.querySelector('input[data-type="sale"][data-from="100"]').getAttribute('data-value');
+                }else if(amount > 1000 && amount <= 10000){
+                    this.defaultCommission = document.querySelector('input[data-type="sale"][data-from="1000"]').getAttribute('data-value');
+                }else if(amount > 10000 && amount <= 50000){
+                    this.defaultCommission = document.querySelector('input[data-type="sale"][data-from="10000"]').getAttribute('data-value');
+                }else if(amount > 50000 && amount <= 100000){
+                    this.defaultCommission = document.querySelector('input[data-type="sale"][data-from="50000"]').getAttribute('data-value');
+                }else if(amount > 100000){
+                    this.defaultCommission = document.querySelector('input[data-type="sale"][data-from="100000"]').getAttribute('data-value');
+                }
+            }else if(typeDeal === 2){ // покупка
+                if(amount > 0 && amount <= 100){
+                    this.defaultCommission = document.querySelector('input[data-type="buy"][data-from="0"]').getAttribute('data-value');
+                }else if(amount > 100 && amount <= 1000){
+                    this.defaultCommission = document.querySelector('input[data-type="buy"][data-from="100"]').getAttribute('data-value');
+                }else if(amount > 1000 && amount <= 10000){
+                    this.defaultCommission = document.querySelector('input[data-type="buy"][data-from="1000"]').getAttribute('data-value');
+                }else if(amount > 10000 && amount <= 50000){
+                    this.defaultCommission = document.querySelector('input[data-type="buy"][data-from="10000"]').getAttribute('data-value');
+                }else if(amount > 50000 && amount <= 100000){
+                    this.defaultCommission = document.querySelector('input[data-type="buy"][data-from="50000"]').getAttribute('data-value');
+                }else if(amount > 100000){
+                    this.defaultCommission = document.querySelector('input[data-type="buy"][data-from="100000"]').getAttribute('data-value');
+                }
+            }
+
+            this.commissionInput.value = this.defaultCommission;
+
         },
         changeCommission(event){
             if(this.customCommission){
@@ -86,8 +135,10 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
             const {target} = event
 
-            if(this.amountInput.value && this.typeDealSelect.value){
 
+            if(this.amountInput.value && this.typeDealSelect.value){
+                this.setCommission();
+                console.log(this.defaultCommission)
                 this.amountInput.classList.remove('is-invalid')
                 this.typeDealSelect.classList.remove('is-invalid')
 

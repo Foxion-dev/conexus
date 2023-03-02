@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Commission;
 use App\Models\Leftovers;
 use App\Models\Office;
+use App\Models\User;
 use App\Models\WorkDay;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class WorkDayController extends Controller
+
+class WorkDayController extends BaseController
 {
     public function start()
     {
@@ -22,26 +24,16 @@ class WorkDayController extends Controller
         return view('auth.step2', compact('workDay'));
     }
 
-    public function changeOffice(){
+    public function changeOffice()
+    {
 
         $data = request()->validate([
             'office_id' => 'required|integer',
         ]);
 
         $office = Office::findOrFail($data['office_id']);
-
-        $lastDayRecord = WorkDay::whereDateBetween('start',(new Carbon)->now()->startOfDay()->toDateString(),(new Carbon)->now()->endOfDay()->toDateString() )
-            ->get();
-        $todayRecordIds = array_column($lastDayRecord->toArray(), 'id');
-
-        $workDays = WorkDay::whereIn('id', $todayRecordIds)
-            ->where([
-                ['office_id', '=', $office->id],
-                ['user_id', '=', auth()->user()->id],
-            ])->get();
-        $workDay = $workDays->first();
-
-        if(!$workDay){
+        $workDay = self::findCurrentWorkDay($office->id);
+        if (!$workDay) {
             $workDay = WorkDay::create(
                 [
                     'office_id' => $office->id,
@@ -49,14 +41,29 @@ class WorkDayController extends Controller
                     'start' => Carbon::now()
                 ],
             );
+            $user = User::find(auth()->user()->id);
+            $user->update(['work_day_id' => $workDay->id]);
+        }else{
+//            dd($workDay);
+            if($workDay->commissions_id_buy && $workDay->commissions_id_sale && $workDay->leftovers_id){
+
+                $user = User::find(auth()->user()->id);
+                $user->update(['work_day_id' => $workDay->id]);
+
+                return redirect()->route('index')->with('workDay', $workDay);
+            }
         }
-        $previousDay = WorkDay::whereDateBetween('start',(new Carbon)->yesterday()->startOfDay()->toDateString(),(new Carbon)->yesterday()->endOfDay()->toDateString() )
-            ->get();
-        // TODO Дописать получение комиссий за предыдущий день
+//        auth()->user()->current_day = $workDay;
+        $previousDay = WorkDay::whereDateBetween('start', (new Carbon)->startOfYear()->startOfDay()->toDateString(), (new Carbon)->yesterday()->endOfDay()->toDateString())
+            ->where(['office_id' => $office->id])
+            ->latest()
+            ->first();
+
         return view('auth.step2', compact('workDay', 'previousDay'));
     }
 
-    public function officeSetData(){
+    public function officeSetData()
+    {
 
         $data = request()->validate([
             'office_id' => 'required|numeric',
@@ -81,7 +88,7 @@ class WorkDayController extends Controller
 
         $workDay = WorkDay::find($data['work_day_id']);
 
-        if($workDay){
+        if ($workDay) {
 
             $leftovers = Leftovers::create([
                 'office_id' => $data['office_id'],
@@ -119,8 +126,27 @@ class WorkDayController extends Controller
                 'leftovers_id' => $leftovers->id,
             ]);
 
-            dd($workDay);
+//            dd($workDay);
+//            $this->current_day = $workDay;
+//            auth()->user()->current_day = $workDay;
+            return redirect()->route('index')->with('workDay', $workDay);
         }
+    }
 
+    public function findCurrentWorkDay($officeId)
+    {
+
+        $lastDayRecord
+            = WorkDay::whereDateBetween('start', (new Carbon)->now()->startOfDay()->toDateString(), (new Carbon)->now()->endOfDay()->toDateString())
+            ->get();
+        $todayRecordIds = array_column($lastDayRecord->toArray(), 'id');
+
+        $workDay = WorkDay::whereIn('id', $todayRecordIds)
+            ->where([
+                ['office_id', '=', $officeId],
+                ['user_id', '=', auth()->user()->id],
+            ])->latest()->first();
+
+        return $workDay;
     }
 }

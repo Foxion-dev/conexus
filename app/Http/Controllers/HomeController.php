@@ -6,7 +6,7 @@ use App\Models\Client;
 use App\Models\Deal;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController extends BaseController
 {
     /**
      * Create a new controller instance.

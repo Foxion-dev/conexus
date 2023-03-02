@@ -2125,19 +2125,66 @@ document.addEventListener("DOMContentLoaded", function () {
     commissionMode: 'off',
     defaultCommission: 2,
     init: function init() {
-      var _this$buttonCalc, _this$customCommissio, _this$commissionSumIn, _this$repaidSumInput, _this$considerCommiss, _this$commissionInput;
+      var _this$buttonCalc, _this$customCommissio, _this$commissionSumIn, _this$repaidSumInput, _this$considerCommiss, _this$commissionInput, _this$amountInput, _this$typeDealSelect;
       var calc = this.defaultCalculate.bind(this);
       var changeCustomCommission = this.changeCustom.bind(this);
       var changeModeCommission = this.changeMode.bind(this);
       var changeCustomCommissionSum = this.changeCommissionSum.bind(this);
       var changeCustomReturnSum = this.changeReturnSum.bind(this);
       var changeCommissionValue = this.changeCommission.bind(this);
+      var changeAmountValue = this.changeAmount.bind(this);
+      var changeTypeDealValue = this.changeTypeDeal.bind(this);
       (_this$buttonCalc = this.buttonCalc) === null || _this$buttonCalc === void 0 ? void 0 : _this$buttonCalc.addEventListener('click', calc);
       (_this$customCommissio = this.customCommissionInput) === null || _this$customCommissio === void 0 ? void 0 : _this$customCommissio.addEventListener('input', changeCustomCommission);
       (_this$commissionSumIn = this.commissionSumInput) === null || _this$commissionSumIn === void 0 ? void 0 : _this$commissionSumIn.addEventListener('input', changeCustomCommissionSum);
       (_this$repaidSumInput = this.repaidSumInput) === null || _this$repaidSumInput === void 0 ? void 0 : _this$repaidSumInput.addEventListener('input', changeCustomReturnSum);
       (_this$considerCommiss = this.considerCommissionInput) === null || _this$considerCommiss === void 0 ? void 0 : _this$considerCommiss.addEventListener('input', changeModeCommission);
       (_this$commissionInput = this.commissionInput) === null || _this$commissionInput === void 0 ? void 0 : _this$commissionInput.addEventListener('input', changeCommissionValue);
+      (_this$amountInput = this.amountInput) === null || _this$amountInput === void 0 ? void 0 : _this$amountInput.addEventListener('input', changeAmountValue);
+      (_this$typeDealSelect = this.typeDealSelect) === null || _this$typeDealSelect === void 0 ? void 0 : _this$typeDealSelect.addEventListener('input', changeTypeDealValue);
+    },
+    changeAmount: function changeAmount() {
+      this.calculate(this.commissionInput.classList.value, this.commissionSumInput.classList.value, this.repaidSumInput.classList.value);
+    },
+    changeTypeDeal: function changeTypeDeal() {
+      this.setCommission();
+      this.calculate(this.commissionInput.classList.value, this.commissionSumInput.classList.value, this.repaidSumInput.classList.value);
+    },
+    setCommission: function setCommission() {
+      var typeDeal = +this.typeDealSelect.value;
+      var amount = +this.amountInput.value;
+      if (typeDeal === 1) {
+        // продажа
+        if (amount > 0 && amount <= 100) {
+          this.defaultCommission = document.querySelector('input[data-type="sale"][data-from="0"]').getAttribute('data-value');
+        } else if (amount > 100 && amount <= 1000) {
+          this.defaultCommission = document.querySelector('input[data-type="sale"][data-from="100"]').getAttribute('data-value');
+        } else if (amount > 1000 && amount <= 10000) {
+          this.defaultCommission = document.querySelector('input[data-type="sale"][data-from="1000"]').getAttribute('data-value');
+        } else if (amount > 10000 && amount <= 50000) {
+          this.defaultCommission = document.querySelector('input[data-type="sale"][data-from="10000"]').getAttribute('data-value');
+        } else if (amount > 50000 && amount <= 100000) {
+          this.defaultCommission = document.querySelector('input[data-type="sale"][data-from="50000"]').getAttribute('data-value');
+        } else if (amount > 100000) {
+          this.defaultCommission = document.querySelector('input[data-type="sale"][data-from="100000"]').getAttribute('data-value');
+        }
+      } else if (typeDeal === 2) {
+        // покупка
+        if (amount > 0 && amount <= 100) {
+          this.defaultCommission = document.querySelector('input[data-type="buy"][data-from="0"]').getAttribute('data-value');
+        } else if (amount > 100 && amount <= 1000) {
+          this.defaultCommission = document.querySelector('input[data-type="buy"][data-from="100"]').getAttribute('data-value');
+        } else if (amount > 1000 && amount <= 10000) {
+          this.defaultCommission = document.querySelector('input[data-type="buy"][data-from="1000"]').getAttribute('data-value');
+        } else if (amount > 10000 && amount <= 50000) {
+          this.defaultCommission = document.querySelector('input[data-type="buy"][data-from="10000"]').getAttribute('data-value');
+        } else if (amount > 50000 && amount <= 100000) {
+          this.defaultCommission = document.querySelector('input[data-type="buy"][data-from="50000"]').getAttribute('data-value');
+        } else if (amount > 100000) {
+          this.defaultCommission = document.querySelector('input[data-type="buy"][data-from="100000"]').getAttribute('data-value');
+        }
+      }
+      this.commissionInput.value = this.defaultCommission;
     },
     changeCommission: function changeCommission(event) {
       if (this.customCommission) {
@@ -2183,6 +2230,8 @@ document.addEventListener("DOMContentLoaded", function () {
       event.preventDefault();
       var target = event.target;
       if (this.amountInput.value && this.typeDealSelect.value) {
+        this.setCommission();
+        console.log(this.defaultCommission);
         this.amountInput.classList.remove('is-invalid');
         this.typeDealSelect.classList.remove('is-invalid');
         if (!this.calcBox.classList.contains('show')) {
