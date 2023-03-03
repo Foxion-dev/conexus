@@ -15,10 +15,10 @@ class CreateLeftoversTable extends Migration
     {
         Schema::create('leftovers', function (Blueprint $table) {
             $table->id();
-            $table->float('USD')->nullable();
-            $table->float('USDT')->nullable();
-            $table->float('KZT')->nullable();
-            $table->float('GEL')->nullable();
+            $table->float('USD',20,2)->nullable();
+            $table->float('USDT',20,2)->nullable();
+            $table->float('KZT',20,2)->nullable();
+            $table->float('GEL',20,2)->nullable();
             $table->unsignedBigInteger('office_id')->nullable();
             $table->timestamps();
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Client;
 use App\Models\Deal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends BaseController
 {
@@ -25,6 +26,10 @@ class HomeController extends BaseController
      */
     public function index()
     {
-        return redirect()->route('index');
+        if(Auth::check()) {
+            return redirect()->route('index');
+        }
+        return redirect()->route('login');
+
     }
 }

@@ -7,10 +7,10 @@
         <ul>
             <li><i class="fa-solid fa-bolt"></i> <a href="{{ route('index') }}">  Главная</a></li>
             <li><i class="fa-solid fa-plus"></i><a href="{{ route('deal.create') }}">Новая сделка</a></li>
-            <li><i class="fa-solid fa-minus"></i><a href="">Новый расход</a></li>
-            <li><i class="fa-solid fa-cash-register"></i><a href="">Инкассация</a></li>
-            <li><i class="fa-solid fa-clock-rotate-left"></i><a href="">История</a></li>
-            <li><i class="fa-solid fa-repeat"></i><a href="">Обновить комиссию</a></li>
+            <li><i class="fa-solid fa-minus"></i><a href="{{ route('expense.create') }}">Новый расход</a></li>
+            <li><i class="fa-solid fa-cash-register"></i><a href="{{ route('encashment.create') }}">Инкассация</a></li>
+            <li><i class="fa-solid fa-clock-rotate-left"></i><a href="{{ route('history') }}">История</a></li>
+            <li><i class="fa-solid fa-repeat"></i><a href="{{ route('commissions.edit') }}">Обновить комиссию</a></li>
         </ul>
     </div>
     <div class="menu-block">

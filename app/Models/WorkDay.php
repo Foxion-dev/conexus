@@ -51,6 +51,15 @@ class WorkDay extends Model
         return $this->hasMany(Deal::class, 'work_day_id', 'id'); // находит по связи "один"
     }
 
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class, 'work_day_id', 'id'); // находит по связи "один"
+    }
+
+    public function encashments()
+    {
+        return $this->hasMany(Encashment::class, 'work_day_id', 'id'); // находит по связи "один"
+    }
 //    public function setCurrent($day)
 //    {
 //        self::$currentDay = $day;

@@ -17,10 +17,10 @@ class CreateDealsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('deal_type_id')->nullable(); // тип сделки
             $table->unsignedBigInteger('client_id')->nullable(); // id клиента
-            $table->unsignedBigInteger('receiving_sum')->nullable(); // сумма получения
+            $table->float('receiving_sum',20,2)->nullable(); // сумма получения
             $table->unsignedBigInteger('return_sum')->nullable(); // сумма отдачи
             $table->unsignedFloat('commission')->nullable(); // комиссия
-            $table->unsignedBigInteger('commission_sum')->nullable(); // сумма комиссии
+            $table->float('commission_sum',20,2)->nullable(); // сумма комиссии
             $table->unsignedBigInteger('receiving_currency_id')->nullable(); // валюта получения
             $table->unsignedBigInteger('return_currency_id')->nullable(); // валюта отдачи
             $table->unsignedBigInteger('work_day_id')->nullable(); // рабочий день

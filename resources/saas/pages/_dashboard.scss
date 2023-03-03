@@ -3,9 +3,7 @@
     flex-direction: column;
     align-items: center;
     &__title{
-        font-size: 44px;
-        font-weight: 700;
-        margin-bottom: 50px;
+        margin-bottom: 35px;
     }
     &__buttons-row{
         display: flex;
@@ -36,36 +34,5 @@
     }
     &__item-value{
         font-size: 30px;
-    }
-}
-
-.operations{
-    margin-bottom: 30px;
-    border-radius: 10px;
-    -webkit-box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.31);
-    -moz-box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.31);
-    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.31);
-    padding: 0 20px 20px;
-    &__title{
-        font-size: 24px;
-        font-weight: 500;
-        margin-bottom: 15px;
-        text-align: center;
-    }
-    &__grid-titles, &__grid-row{
-        display: grid;
-        grid-template-columns: repeat(9,1fr);
-        gap: 15px;
-        text-align: center;
-    }
-    &__grid-row{
-        margin-bottom: 20px;
-    }
-}
-
-.actions{
-    //gap: 0;
-    i{
-        margin: 0;
     }
 }

@@ -58,7 +58,7 @@ class WorkDayController extends BaseController
             ->where(['office_id' => $office->id])
             ->latest()
             ->first();
-
+//        dd($previousDay);
         return view('auth.step2', compact('workDay', 'previousDay'));
     }
 

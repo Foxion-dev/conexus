@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class CreateWorkDaysTable extends Migration
@@ -50,11 +51,13 @@ class CreateWorkDaysTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::table('users', function (Blueprint $table) {
-
             $table->dropForeign('user_work_day_fk');
             $table->dropIndex('user_work_day_idx');
+
         });
         Schema::dropIfExists('work_days');
+        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

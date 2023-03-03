@@ -207,44 +207,4 @@ class DealController extends BaseController
 //        dd('restored');
     }
 
-    // firstOrCreate - найти или создать
-    // updateOrCreate - изменить или создать
-
-    public function firstOrCreate()
-    {
-
-        $anotherDeal = [
-            'title' => 'titl1e updated',
-            'content' => 'some i1nteresting updated',
-            'image' => 'updat1ed.jpg',
-            'likes' => 5000,
-            'is_published' => 1
-        ];
-
-        $deal = Deal::firstOrCreate(
-            ['title' => 'tit1e updated'], // контрольный массив(ключи по которым не должно быть повторений)
-            $anotherDeal // массив поста
-        );
-
-        dd('firstOrCreate');
-    }
-
-    public function updateOrCreate()
-    {
-
-        $anotherDeal = [
-            'title' => 'titl1e updated',
-            'content' => 'some i1nteresting updated',
-            'image' => 'updat1ed.jpg',
-            'likes' => 5000,
-            'is_published' => 1
-        ];
-
-        $deal = Deal::updateOrCreate(
-            ['title' => 'tit1e updated'], // контрольный массив(ключи по которым не должно быть повторений)
-            $anotherDeal // массив поста
-        );
-
-        dd('updateOrCreate');
-    }
 }

@@ -21,8 +21,8 @@ Route::post('/step2', [App\Http\Controllers\WorkDayController::class, 'officeSet
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [App\Http\Controllers\IndexController::class, 'index'])->name('index');
+Route::get('/history', [App\Http\Controllers\HistoryController::class, 'index'])->name('history');
 
-//Route::resource('deals', \App\Http\Controllers\DealController::class);
 
 Route::get('/deals', [App\Http\Controllers\DealController::class, 'index'])->name('deal.index');
 Route::get('/deals/create', [App\Http\Controllers\DealController::class, 'create'])->name('deal.create');
@@ -31,6 +31,28 @@ Route::get('deals/{deal}', [App\Http\Controllers\DealController::class, 'show'])
 Route::get('deals/{deal}/edit', [App\Http\Controllers\DealController::class, 'edit'])->name('deal.edit');
 Route::patch('deals/{deal}', [App\Http\Controllers\DealController::class, 'update'])->name('deal.update');
 Route::delete('deals/{deal}', [App\Http\Controllers\DealController::class, 'destroy'])->name('deal.destroy');
+
+Route::get('/expenses', [App\Http\Controllers\ExpenseController::class, 'index'])->name('expense.index');
+Route::get('/expenses/create', [App\Http\Controllers\ExpenseController::class, 'create'])->name('expense.create');
+Route::post('expenses', [App\Http\Controllers\ExpenseController::class, 'store'])->name('expense.store');
+Route::get('expenses/{expense}', [App\Http\Controllers\ExpenseController::class, 'show'])->name('expense.show');
+Route::get('expenses/{expense}/edit', [App\Http\Controllers\ExpenseController::class, 'edit'])->name('expense.edit');
+Route::patch('expenses/{expense}', [App\Http\Controllers\ExpenseController::class, 'update'])->name('expense.update');
+Route::delete('expenses/{expense}', [App\Http\Controllers\ExpenseController::class, 'destroy'])->name('expense.destroy');
+
+Route::get('/encashments', [App\Http\Controllers\EncashmentController::class, 'index'])->name('encashment.index');
+Route::get('/encashments/create', [App\Http\Controllers\EncashmentController::class, 'create'])->name('encashment.create');
+Route::post('encashments', [App\Http\Controllers\EncashmentController::class, 'store'])->name('encashment.store');
+Route::get('encashments/{encashment}', [App\Http\Controllers\EncashmentController::class, 'show'])->name('encashment.show');
+Route::get('encashments/{encashment}/edit', [App\Http\Controllers\EncashmentController::class, 'edit'])->name('encashment.edit');
+Route::patch('encashments/{encashment}', [App\Http\Controllers\EncashmentController::class, 'update'])->name('encashment.update');
+Route::delete('encashments/{encashment}', [App\Http\Controllers\EncashmentController::class, 'destroy'])->name('encashment.destroy');
+
+
+Route::get('commissions/edit', [App\Http\Controllers\CommissionController::class, 'edit'])->name('commissions.edit');
+Route::patch('commissions/edit', [App\Http\Controllers\CommissionController::class, 'update'])->name('commissions.update');
+
+
 
 //Route::group(['namespace' => 'App\Http\Controllers\Deal'], function (){
 //

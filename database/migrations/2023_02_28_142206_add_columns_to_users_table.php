@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 class AddColumnsToUsersTable extends Migration
@@ -31,13 +32,10 @@ class AddColumnsToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-
-//            $table->dropForeign('user_work_day_fk');
-//            $table->dropIndex('user_work_day_idx');
-//
-//            $table->drop('role');
-//            $table->drop('work_day_id');
-//            $table->drop('blocked');
+            DB::statement('SET FOREIGN_KEY_CHECKS = 0');
+            $table->dropColumn('work_day_id');
+            $table->dropColumn('blocked');
+            DB::statement('SET FOREIGN_KEY_CHECKS = 1');
         });
     }
 }

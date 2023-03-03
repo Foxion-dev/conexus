@@ -23,9 +23,9 @@ class IndexController extends BaseController
             auth()->logout();
         }
         $this->current_day = $data['work_day'];
-        $data['deals'] = $data['work_day']->deals;
-
-//        dump($data);
+        $data['deals'] = $data['work_day']->deals->take(-3)->sortByDesc('created_at');
+        $data['expenses'] = $data['work_day']->expenses->take(-3)->sortByDesc('created_at');
+        $data['encashments'] = $data['work_day']->encashments->take(-3)->sortByDesc('created_at');
 
         return view('dashboard', compact('data'));
     }

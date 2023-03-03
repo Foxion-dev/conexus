@@ -48,7 +48,12 @@ dfn {
 
 h1 {
   font-size: 2em;
-  margin: 0.67em 0;
+  margin: 0;
+}
+
+h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
 }
 
 mark {
@@ -220,7 +225,7 @@ main:not([class]) {
 
 .container {
   padding: 30px;
-  max-width: 1200px;
+  max-width: 1430px;
   width: 100%;
   margin: 0 auto;
 }
@@ -359,6 +364,59 @@ i {
   gap: 10px;
 }
 
+.page-title {
+  font-size: 44px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 24px;
+  padding: 15px 0;
+  font-weight: 500;
+  text-align: center;
+}
+
+.operations {
+  max-width: 100%;
+  width: 100%;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.31);
+  padding: 0 20px 20px;
+}
+.operations__title {
+  margin-bottom: 15px;
+}
+.operations__grid-titles, .operations__grid-row {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 55px;
+  text-align: center;
+}
+.operations__grid-titles div, .operations__grid-row div {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.operations__grid-titles {
+  margin-bottom: 20px;
+}
+.operations__grid-row {
+  margin-bottom: 20px;
+}
+.operations--expense .operations__grid-titles, .operations--expense .operations__grid-row {
+  grid-template-columns: repeat(5, 1fr);
+}
+.operations--encashments .operations__grid-titles, .operations--encashments .operations__grid-row {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.actions i {
+  margin: 0;
+}
+
 .menu-block__title {
   font-size: 20px;
   font-weight: 700;
@@ -426,9 +484,7 @@ i {
   align-items: center;
 }
 .dashboard__title {
-  font-size: 44px;
-  font-weight: 700;
-  margin-bottom: 50px;
+  margin-bottom: 35px;
 }
 .dashboard__buttons-row {
   display: flex;
@@ -459,30 +515,8 @@ i {
   font-size: 30px;
 }
 
-.operations {
-  margin-bottom: 30px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.31);
-  padding: 0 20px 20px;
-}
-.operations__title {
-  font-size: 24px;
-  font-weight: 500;
-  margin-bottom: 15px;
-  text-align: center;
-}
-.operations__grid-titles, .operations__grid-row {
-  display: grid;
-  grid-template-columns: repeat(9, 1fr);
-  gap: 15px;
-  text-align: center;
-}
-.operations__grid-row {
-  margin-bottom: 20px;
-}
-
-.actions i {
-  margin: 0;
+.history__title {
+  margin-bottom: 35px;
 }
 
 .deal-form {
