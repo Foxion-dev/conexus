@@ -4,19 +4,19 @@
         @csrf
         @method('patch')
         <div class="deal-form__commissions">
-            <input type="hidden" data-type="buy" data-from="0" data-value="{{ $workDay->commissionsBuy->from_0 }}">
-            <input type="hidden" data-type="buy" data-from="100" data-value="{{ $workDay->commissionsBuy->from_100 }}">
-            <input type="hidden" data-type="buy" data-from="1000" data-value="{{ $workDay->commissionsBuy->from_1000 }}">
-            <input type="hidden" data-type="buy" data-from="10000" data-value="{{ $workDay->commissionsBuy->from_10000 }}">
-            <input type="hidden" data-type="buy" data-from="50000" data-value="{{ $workDay->commissionsBuy->from_50000 }}">
-            <input type="hidden" data-type="buy" data-from="100000" data-value="{{ $workDay->commissionsBuy->from_100000 }}">
+            <input type="hidden" data-type="buy" data-from="0" data-value="{{ $workDay->officeDay->commissionsBuy->from_0 }}">
+            <input type="hidden" data-type="buy" data-from="100" data-value="{{ $workDay->officeDay->commissionsBuy->from_100 }}">
+            <input type="hidden" data-type="buy" data-from="1000" data-value="{{ $workDay->officeDay->commissionsBuy->from_1000 }}">
+            <input type="hidden" data-type="buy" data-from="10000" data-value="{{ $workDay->officeDay->commissionsBuy->from_10000 }}">
+            <input type="hidden" data-type="buy" data-from="50000" data-value="{{ $workDay->officeDay->commissionsBuy->from_50000 }}">
+            <input type="hidden" data-type="buy" data-from="100000" data-value="{{ $workDay->officeDay->commissionsBuy->from_100000 }}">
 
-            <input type="hidden" data-type="sale" data-from="0" data-value="{{ $workDay->commissionsSale->from_0 }}">
-            <input type="hidden" data-type="sale" data-from="100" data-value="{{ $workDay->commissionsSale->from_100 }}">
-            <input type="hidden" data-type="sale" data-from="1000" data-value="{{ $workDay->commissionsSale->from_1000 }}">
-            <input type="hidden" data-type="sale" data-from="10000" data-value="{{ $workDay->commissionsSale->from_10000 }}">
-            <input type="hidden" data-type="sale" data-from="50000" data-value="{{ $workDay->commissionsSale->from_50000 }}">
-            <input type="hidden" data-type="sale" data-from="100000" data-value="{{ $workDay->commissionsSale->from_100000 }}">
+            <input type="hidden" data-type="sale" data-from="0" data-value="{{ $workDay->officeDay->commissionsSale->from_0 }}">
+            <input type="hidden" data-type="sale" data-from="100" data-value="{{ $workDay->officeDay->commissionsSale->from_100 }}">
+            <input type="hidden" data-type="sale" data-from="1000" data-value="{{ $workDay->officeDay->commissionsSale->from_1000 }}">
+            <input type="hidden" data-type="sale" data-from="10000" data-value="{{ $workDay->officeDay->commissionsSale->from_10000 }}">
+            <input type="hidden" data-type="sale" data-from="50000" data-value="{{ $workDay->officeDay->commissionsSale->from_50000 }}">
+            <input type="hidden" data-type="sale" data-from="100000" data-value="{{ $workDay->officeDay->commissionsSale->from_100000 }}">
         </div>
         <div class="form-input">
             <label for="deal_type_id">Тип сделки:</label>
@@ -37,7 +37,7 @@
 
         <div class="form-input ">
             <label for="amount"></label>
-            <input  type="text" class="@error('amount') is-invalid @enderror" name="amount" placeholder="Введите сумму клиента" value="{{ $deal->receiving_sum }}" >
+            <input  type="text" class="@error('amount') is-invalid @enderror" name="amount" placeholder="Введите сумму клиента" value="{{ $deal->amount }}" >
 
             @error('amount')
             <span class="form-input__error" role="alert">
@@ -92,7 +92,7 @@
                 <div class="deal-calculator__row flex-body">
                     <div class="form-input">
                         <label for="issuance_amount"></label>
-                        <input type="text" class="@error('issuance_amount') is-invalid @enderror disabled" name="issuance_amount" placeholder="Сумма к выдачи" value="{{ $deal->return_sum }}" >
+                        <input type="text" class="@error('issuance_amount') is-invalid @enderror disabled" name="issuance_amount" placeholder="Сумма к выдачи" value="{{ $deal->issuance_amount }}" >
 
                         @error('issuance_amount')
                         <span class="form-input__error" role="alert">

@@ -11,6 +11,7 @@ use App\Models\DealType;
 use App\Models\EncashmentType;
 use App\Models\Leftovers;
 use App\Models\Office;
+use App\Models\OfficeDay;
 use App\Models\Source;
 use App\Models\User;
 use App\Models\WorkDay;
@@ -29,6 +30,7 @@ class DatabaseSeeder extends Seeder
         $sources = ['улица', 'inst', 'telegram', 'друг', 'таргет'];
         $dealTypes = ['Продажа', 'Покупка'];
         $encashmentTypes = ['Приход', 'Расход'];
+        $offices = ['Батуми', 'Тбилиси', 'Кабулети', 'Стамбул', 'Киев'];
 
         foreach ($currencies as $currency) {
             Currency::firstOrCreate(
@@ -55,15 +57,26 @@ class DatabaseSeeder extends Seeder
             );
         }
 
+        foreach ($offices as $office) {
+            Office::firstOrCreate(
+                ['name' => $office],
+                ['name' => $office]
+            );
+        }
+
         Client::factory(10)->create();
-        Deal::factory(10)->create();
-        Office::factory(5)->create();
+//        Office::factory(10)->create();
         Collector::factory(5)->create();
-        Leftovers::factory(1)->create();
+        Leftovers::factory(10)->create();
         Commission::factory(15)->create();
 
         User::create(['name' => 'Admin', 'email' => 'admin@conexus.com', 'password' => bcrypt('HgZuM9XjBBE7xkb')]);
-        WorkDay::factory(1)->create();
+        User::create(['name' => 'Operator', 'email' => 'oper@conexus.com', 'password' => bcrypt('HgZuM9XjBBE7xkb')]);
+        User::create(['name' => 'Operator 2', 'email' => 'oper2@conexus.com', 'password' => bcrypt('HgZuM9XjBBE7xkb')]);
+
+        OfficeDay::factory(5)->create();
+        WorkDay::factory(10)->create();
+        Deal::factory(10)->create();
 
         // \App\Models\User::factory(10)->create();
     }

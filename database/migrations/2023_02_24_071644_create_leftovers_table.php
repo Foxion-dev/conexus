@@ -19,13 +19,13 @@ class CreateLeftoversTable extends Migration
             $table->float('USDT',20,2)->nullable();
             $table->float('KZT',20,2)->nullable();
             $table->float('GEL',20,2)->nullable();
-            $table->unsignedBigInteger('office_id')->nullable();
+//            $table->unsignedBigInteger('office_day_id')->nullable();
             $table->timestamps();
 
             $table->softDeletes();
 
-            $table->index('office_id', 'leftovers_office_idx');
-            $table->foreign('office_id', 'leftovers_office_fk')->on('offices')->references('id');
+//            $table->index('office_day_id', 'leftovers_office_day_idx');
+//            $table->foreign('office_day_id', 'leftovers_office_day_fk')->on('office_days')->references('id');
 
         });
     }

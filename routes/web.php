@@ -48,6 +48,20 @@ Route::get('encashments/{encashment}/edit', [App\Http\Controllers\EncashmentCont
 Route::patch('encashments/{encashment}', [App\Http\Controllers\EncashmentController::class, 'update'])->name('encashment.update');
 Route::delete('encashments/{encashment}', [App\Http\Controllers\EncashmentController::class, 'destroy'])->name('encashment.destroy');
 
+Route::get('/clients', [App\Http\Controllers\ClientController::class, 'index'])->name('client.index');
+Route::get('/clients/create', [App\Http\Controllers\ClientController::class, 'create'])->name('client.create');
+Route::post('clients', [App\Http\Controllers\ClientController::class, 'store'])->name('client.store');
+Route::get('clients/{client}', [App\Http\Controllers\ClientController::class, 'show'])->name('client.show');
+Route::get('clients/{client}/edit', [App\Http\Controllers\ClientController::class, 'edit'])->name('client.edit');
+Route::patch('clients/{client}', [App\Http\Controllers\ClientController::class, 'update'])->name('client.update');
+Route::delete('clients/{client}', [App\Http\Controllers\ClientController::class, 'destroy'])->name('client.destroy');
+
+
+Route::get('/sources', [App\Http\Controllers\SourceController::class, 'index'])->name('source.index');
+Route::get('/sources/create', [App\Http\Controllers\SourceController::class, 'create'])->name('source.create');
+Route::post('sources', [App\Http\Controllers\SourceController::class, 'store'])->name('source.store');
+Route::patch('sources/{source}', [App\Http\Controllers\SourceController::class, 'update'])->name('source.update');
+Route::delete('sources/{source}', [App\Http\Controllers\SourceController::class, 'destroy'])->name('source.destroy');
 
 Route::get('commissions/edit', [App\Http\Controllers\CommissionController::class, 'edit'])->name('commissions.edit');
 Route::patch('commissions/edit', [App\Http\Controllers\CommissionController::class, 'update'])->name('commissions.update');

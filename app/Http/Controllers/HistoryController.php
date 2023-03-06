@@ -9,7 +9,7 @@ use App\Models\Expense;
 use App\Models\WorkDay;
 use Illuminate\Http\Request;
 
-class HistoryController extends Controller
+class HistoryController extends BaseController
 {
     public function index()
     {

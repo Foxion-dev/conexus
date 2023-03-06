@@ -35,7 +35,13 @@ sup{top:-0.5em}
 
 sub{bottom:-0.25em}
 
-img{border:0}
+img{
+    max-width: 100%;
+    width: 100%;
+    display: block;
+    object-fit: contain;
+    border: 0;
+}
 
 svg:not(:root){overflow:hidden}
 
@@ -145,6 +151,9 @@ i{
 
 .logo {
     margin-bottom: 30px;
+    img{
+        max-width: 195px;
+    }
 }
 
 .btn{
@@ -205,6 +214,20 @@ i{
         font-size: 18px;
         font-weight: 700;
         color: $defaultColorWhite;
+        &.file-label{
+            background: $defaultColorWhite;
+            color: $defaultColorText;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    }
+    img{
+        max-width: 100%;
+
+        object-fit: contain;
+        display: block;
+        margin-bottom: 20px;
     }
     input{
         border: 2px solid transparent;
@@ -221,6 +244,15 @@ i{
         &[type='checkbox']{
             max-width: 25px;
             height: 25px;
+        }
+        &[type='file']{
+            background: transparent;
+            padding-left: 0;
+            color: $defaultColorWhite;
+            cursor: pointer;
+            &:focus{
+                border: 2px solid transparent;
+            }
         }
         &:disabled, &.disabled{
             background: $inputBGDisabled;
@@ -288,7 +320,7 @@ i{
     -webkit-box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.31);
     -moz-box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.31);
     box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.31);
-    padding: 0 20px 20px;
+    padding: 20px;
     &__title{
         margin-bottom: 15px;
     }
@@ -305,11 +337,17 @@ i{
         }
     }
     &__grid-titles{
-        margin-bottom: 20px;
+        padding-bottom: 15px;
+        margin-bottom: 10px;
+        border-bottom: 1px solid $defaultColorWhite;
     }
     &__grid-row{
         margin-bottom: 20px;
     }
+    .mini-img{
+        max-width: 50px;
+    }
+
     &--expense{
         .operations__grid-titles, .operations__grid-row{
             grid-template-columns: repeat(5,1fr);
@@ -318,6 +356,16 @@ i{
     &--encashments{
         .operations__grid-titles, .operations__grid-row{
             grid-template-columns: repeat(6,1fr);
+        }
+    }
+    &--clients{
+        .operations__grid-titles, .operations__grid-row{
+            grid-template-columns: repeat(8,1fr);
+        }
+    }
+    &--sources{
+        .operations__grid-titles, .operations__grid-row{
+            grid-template-columns: repeat(3,1fr);
         }
     }
 }

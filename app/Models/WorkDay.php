@@ -24,27 +24,12 @@ class WorkDay extends Model
 ////        return $query->whereDate($fieldName,'>=',$fromDate)->whereDate($fieldName,'<=',$todate);
 //    }
 
-    public function commissionsBuy()
+    public function officeDay()
     {
-        return $this->belongsTo(Commission::class, 'commissions_id_buy', 'id');
+        return $this->belongsTo(OfficeDay::class, 'office_day_id', 'id');
     }
 
-    public function commissionsSale()
-    {
-        return $this->belongsTo(Commission::class, 'commissions_id_sale', 'id');
-    }
 
-    public function commissions(){
-        return [
-            'sale' => self::commissionsSale(),
-            'buy' => self::commissionsBuy(),
-        ];
-    }
-
-    public function leftovers()
-    {
-        return $this->belongsTo(Leftovers::class, 'leftovers_id', 'id'); // находит по связи "один"
-    }
 
     public function deals()
     {

@@ -28,7 +28,6 @@ class LeftoversFactory extends Factory
             'KZT' => random_int(0, 100000),
             'USDT' => random_int(0, 100000),
             'USD' => random_int(0, 100000),
-            'office_id' => 1,
         ];
     }
 }

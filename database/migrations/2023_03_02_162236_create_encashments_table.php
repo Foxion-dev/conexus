@@ -24,14 +24,14 @@ class CreateEncashmentsTable extends Migration
 
             $table->softDeletes();
 
-            $table->index('work_day_id', 'encashment_currency_idx');
-            $table->foreign('work_day_id', 'encashment_currency_fk')->on('currencies')->references('id');
+            $table->index('work_day_id', 'encashment_work_day_idx');
+            $table->foreign('work_day_id', 'encashment_work_day_fk')->on('work_days')->references('id');
 
             $table->index('type_id', 'encashment_type_idx');
             $table->foreign('type_id', 'encashment_type_fk')->on('encashment_types')->references('id');
 
-            $table->index('currency_id', 'encashment_work_day_idx');
-            $table->foreign('currency_id', 'encashment_work_day_fk')->on('work_days')->references('id');
+            $table->index('currency_id', 'encashment_currency_idx');
+            $table->foreign('currency_id', 'encashment_currency_fk')->on('currencies')->references('id');
 
             $table->index('collector_id', 'encashment_collector_idx');
             $table->foreign('collector_id', 'encashment_collector_fk')->on('collectors')->references('id');

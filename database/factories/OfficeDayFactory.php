@@ -10,14 +10,13 @@ use App\Models\DealType;
 use App\Models\Leftovers;
 use App\Models\Office;
 use App\Models\OfficeDay;
-use App\Models\User;
 use App\Models\WorkDay;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class WorkDayFactory extends Factory
+class OfficeDayFactory extends Factory
 {
-    protected $model = WorkDay::class;
+    protected $model = OfficeDay::class;
 
     /**
      * Define the model's default state.
@@ -27,9 +26,11 @@ class WorkDayFactory extends Factory
     public function definition()
     {
         return [
-            'start' => Carbon::now()->subDays(random_int(1,20)),
-            'office_day_id' => OfficeDay::get()->random()->id,
-            'user_id' => User::get()->random()->id,
+            'start' => Carbon::now()->subDays(random_int(1,10)),
+            'office_id' => Office::get()->random()->id,
+            'leftovers_id' => Leftovers::get()->random()->id,
+            'commissions_id_buy' => Commission::get()->random()->id,
+            'commissions_id_sale' => Commission::get()->random()->id,
         ];
     }
 }

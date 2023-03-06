@@ -7,11 +7,11 @@
 
             <div class="balance-box__item">
                 <div class="balance-box__item-title">Остаток USD ($)</div>
-                <div class="balance-box__item-value">{{ $data['work_day']->leftovers->USD ?? '???' }}</div>
+                <div class="balance-box__item-value">{{ $data['work_day']->officeDay->leftovers->USD ?? '???' }}</div>
             </div>
             <div class="balance-box__item">
                 <div class="balance-box__item-title">Остаток USDT (tether)</div>
-                <div class="balance-box__item-value">{{ $data['work_day']->leftovers->USDT ?? '???' }}</div>
+                <div class="balance-box__item-value">{{ $data['work_day']->officeDay->leftovers->USDT ?? '???' }}</div>
             </div>
         </div>
 

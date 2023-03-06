@@ -4,9 +4,9 @@
 
 <div class="container">
 
-    <form method="POST"  class="default-form"  action="{{ route('auth.office.data') }}">
+    <form method="POST" class="default-form"  action="{{ route('auth.office.data') }}">
             @csrf
-            <input type="hidden" name="office_id" value="{{ $workDay->office_id }}">
+            <input type="hidden" name="office_id" value="{{ $workDay->officeDay->office_id }}">
             <input type="hidden" name="work_day_id" value="{{ $workDay->id }}">
             <h2 class="default-form__title">Введите остатки:</h2>
             <div class="default-form__row flex-body ">

@@ -32,7 +32,6 @@ class CommissionFactory extends Factory
             'from_10000' => random_int(1, 3),
             'from_50000' => random_int(1, 3),
             'from_100000' => random_int(1, 3),
-            'office_id' => Office::get()->random()->id,
             'type' => $types[random_int(0, 1)],
         ];
     }

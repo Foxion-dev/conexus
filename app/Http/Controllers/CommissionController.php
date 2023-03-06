@@ -33,8 +33,8 @@ class CommissionController extends BaseController
 
         $workDay = WorkDay::find(auth()->user()->work_day_id);
 
-        $commissionBuy = Commission::find($workDay->commissionsBuy->id);
-        $commissionSale = Commission::find($workDay->commissionsSale->id);
+        $commissionBuy = Commission::find($workDay->officeDay->commissionsBuy->id);
+        $commissionSale = Commission::find($workDay->officeDay->commissionsSale->id);
 
         $commissionBuyData = [
             'from_0' => $data['buy_from_0'],

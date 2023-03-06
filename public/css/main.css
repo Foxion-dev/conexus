@@ -81,6 +81,11 @@ sub {
 }
 
 img {
+  max-width: 100%;
+  width: 100%;
+  display: block;
+  -o-object-fit: contain;
+     object-fit: contain;
   border: 0;
 }
 
@@ -249,6 +254,9 @@ i {
 .logo {
   margin-bottom: 30px;
 }
+.logo img {
+  max-width: 195px;
+}
 
 .btn {
   display: flex;
@@ -308,6 +316,20 @@ i {
   font-weight: 700;
   color: #fff;
 }
+.form-input label.file-label {
+  background: #fff;
+  color: #1a202c;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.form-input img {
+  max-width: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  display: block;
+  margin-bottom: 20px;
+}
 .form-input input {
   border: 2px solid transparent;
   border-radius: 5px;
@@ -324,6 +346,15 @@ i {
 .form-input input[type=checkbox] {
   max-width: 25px;
   height: 25px;
+}
+.form-input input[type=file] {
+  background: transparent;
+  padding-left: 0;
+  color: #fff;
+  cursor: pointer;
+}
+.form-input input[type=file]:focus {
+  border: 2px solid transparent;
 }
 .form-input input:disabled, .form-input input.disabled {
   background: #918f8f;
@@ -383,7 +414,7 @@ i {
   margin-bottom: 30px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.31);
-  padding: 0 20px 20px;
+  padding: 20px;
 }
 .operations__title {
   margin-bottom: 15px;
@@ -401,16 +432,27 @@ i {
   align-items: center;
 }
 .operations__grid-titles {
-  margin-bottom: 20px;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #fff;
 }
 .operations__grid-row {
   margin-bottom: 20px;
+}
+.operations .mini-img {
+  max-width: 50px;
 }
 .operations--expense .operations__grid-titles, .operations--expense .operations__grid-row {
   grid-template-columns: repeat(5, 1fr);
 }
 .operations--encashments .operations__grid-titles, .operations--encashments .operations__grid-row {
   grid-template-columns: repeat(6, 1fr);
+}
+.operations--clients .operations__grid-titles, .operations--clients .operations__grid-row {
+  grid-template-columns: repeat(8, 1fr);
+}
+.operations--sources .operations__grid-titles, .operations--sources .operations__grid-row {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .actions i {

@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Currency;
 use App\Models\Deal;
 use App\Models\DealType;
+use App\Models\OfficeDay;
 use App\Models\Source;
 use App\Models\WorkDay;
 use Illuminate\Http\Request;
@@ -69,19 +70,45 @@ class DealController extends BaseController
             $clientData
         );
 
-        if($data["type_id"] == 1){
-            $receivingCurrency = Currency::find(1);
-            $returnCurrency = Currency::find(3);
-        }elseif ($data["type_id"] == 2){
-            $receivingCurrency = Currency::find(3);
-            $returnCurrency = Currency::find(1);
-        }
+        switch ($data["type_id"]){
+            case 1: // Продажа (клиент нам продаёт крипту)
+                $receivingCurrency = Currency::find(1);
+                $returnCurrency = Currency::find(3);
 
+                if($commissionOn){
+                    $data['receiving_sum'] = $data["amount"];
+                    $data['return_sum'] = $data["issuance_amount"];
+                }else{
+                    $data['receiving_sum'] = $data["issuance_amount"];
+                    $data['return_sum'] = $data["amount"];
+                }
+                break;
+
+            case 2: // Покупка (клиент у нас покупает крипту)
+
+                $receivingCurrency = Currency::find(3);
+                $returnCurrency = Currency::find(1);
+
+                if($commissionOn){
+                    $data['receiving_sum'] = $data["amount"];
+                    $data['return_sum'] = $data["issuance_amount"];
+                }else{
+                    $data['receiving_sum'] = $data["issuance_amount"];
+                    $data['return_sum'] = $data["amount"];
+                }
+
+                break;
+
+            default:break;
+        }
+//        dd($data);
         $dealData = [
             'deal_type_id' => $data["type_id"] ?? null,
             'client_id' => $client->id ?? null,
-            'receiving_sum' => $data["amount"] ?? null,
-            'return_sum' => $data["issuance_amount"] ?? null,
+            'amount' => $data["amount"] ?? null,
+            'issuance_amount' => $data["issuance_amount"] ?? null,
+            'receiving_sum' => $data["receiving_sum"] ?? null,
+            'return_sum' => $data["return_sum"] ?? null,
             'commission' => $data["percent_commission"] ?? null,
             'commission_sum' => $data["amount_commission"] ?? null,
             'receiving_currency_id' => $receivingCurrency->id ?? null,
@@ -91,7 +118,12 @@ class DealController extends BaseController
             'work_day_id' => auth()->user()->work_day_id,
         ];
 
+//        dd($dealData);
         $deal = Deal::create($dealData);
+
+        if(isset($deal->id)){
+            $updateLeftovers = OfficeDayController::updateLeftoversFromDeal($deal);
+        }
 
         return redirect()->route('index');
     }
@@ -154,19 +186,45 @@ class DealController extends BaseController
             $clientData
         );
 
-        if($data["type_id"] == 1){
-            $receivingCurrency = Currency::find(1);
-            $returnCurrency = Currency::find(3);
-        }elseif ($data["type_id"] == 2){
-            $receivingCurrency = Currency::find(3);
-            $returnCurrency = Currency::find(1);
+        switch ($data["type_id"]){
+            case 1: // Продажа (клиент нам продаёт крипту)
+                $receivingCurrency = Currency::find(1);
+                $returnCurrency = Currency::find(3);
+
+                if($commissionOn){
+                    $data['receiving_sum'] = $data["amount"];
+                    $data['return_sum'] = $data["issuance_amount"];
+                }else{
+                    $data['receiving_sum'] = $data["issuance_amount"];
+                    $data['return_sum'] = $data["amount"];
+                }
+                break;
+
+            case 2: // Покупка (клиент у нас покупает крипту)
+
+                $receivingCurrency = Currency::find(3);
+                $returnCurrency = Currency::find(1);
+
+                if($commissionOn){
+                    $data['receiving_sum'] = $data["amount"];
+                    $data['return_sum'] = $data["issuance_amount"];
+                }else{
+                    $data['receiving_sum'] = $data["issuance_amount"];
+                    $data['return_sum'] = $data["amount"];
+                }
+
+                break;
+
+            default:break;
         }
 
         $dealData = [
             'deal_type_id' => $data["type_id"] ?? null,
             'client_id' => $client->id ?? null,
-            'receiving_sum' => $data["amount"] ?? null,
-            'return_sum' => $data["issuance_amount"] ?? null,
+            'amount' => $data["amount"] ?? null,
+            'issuance_amount' => $data["issuance_amount"] ?? null,
+            'receiving_sum' => $data["receiving_sum"] ?? null,
+            'return_sum' => $data["return_sum"] ?? null,
             'commission' => $data["percent_commission"] ?? null,
             'commission_sum' => $data["amount_commission"] ?? null,
             'receiving_currency_id' => $receivingCurrency->id ?? null,
@@ -176,7 +234,12 @@ class DealController extends BaseController
             'work_day_id' => auth()->user()->work_day_id,
         ];
 
+        $deleteDealLeftovers = OfficeDayController::unsetLeftoversFromDeal($deal); // удалим записи в остатки
         $deal->update($dealData);
+
+        if(isset($deal->id)){
+            $updateLeftovers = OfficeDayController::updateLeftoversFromDeal($deal);
+        }
 
         return redirect()->route('index');
 
@@ -184,7 +247,7 @@ class DealController extends BaseController
 
     public function delete(Deal $deal)
     {
-
+        $deleteDealLeftovers = OfficeDayController::unsetLeftoversFromDeal($deal); // удалим записи в остатки
         $deal->delete();
 
         return redirect()->route('index');
@@ -192,7 +255,7 @@ class DealController extends BaseController
 
     public function destroy(Deal $deal)
     {
-
+        $deleteDealLeftovers = OfficeDayController::unsetLeftoversFromDeal($deal); // удалим записи в остатки
         $deal->delete();
 
         return redirect()->route('index');

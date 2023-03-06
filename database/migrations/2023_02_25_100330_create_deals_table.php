@@ -17,6 +17,8 @@ class CreateDealsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('deal_type_id')->nullable(); // тип сделки
             $table->unsignedBigInteger('client_id')->nullable(); // id клиента
+            $table->float('amount',20,2)->nullable(); // введённая сумма
+            $table->float('issuance_amount',20,2)->nullable(); // рассчитанная сумма
             $table->float('receiving_sum',20,2)->nullable(); // сумма получения
             $table->unsignedBigInteger('return_sum')->nullable(); // сумма отдачи
             $table->unsignedFloat('commission')->nullable(); // комиссия

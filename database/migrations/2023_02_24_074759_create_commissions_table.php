@@ -22,13 +22,13 @@ class CreateCommissionsTable extends Migration
             $table->float('from_10000')->nullable();
             $table->float('from_50000')->nullable();
             $table->float('from_100000')->nullable();
-            $table->unsignedBigInteger('office_id')->nullable();
+//            $table->unsignedBigInteger('office_day_id')->nullable();
             $table->timestamps();
 
             $table->softDeletes(); // подключаем "мягкое удаление"
 
-            $table->index('office_id', 'commissions_office_idx');
-            $table->foreign('office_id', 'commissions_office_fk')->on('offices')->references('id');
+//            $table->index('office_day_id', 'commissions_office_day_idx');
+//            $table->foreign('office_day_id', 'commissions_office_day_fk')->on('office_days')->references('id');
         });
     }
 

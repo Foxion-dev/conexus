@@ -11,21 +11,25 @@
             <li><i class="fa-solid fa-cash-register"></i><a href="{{ route('encashment.create') }}">Инкассация</a></li>
             <li><i class="fa-solid fa-clock-rotate-left"></i><a href="{{ route('history') }}">История</a></li>
             <li><i class="fa-solid fa-repeat"></i><a href="{{ route('commissions.edit') }}">Обновить комиссию</a></li>
+            <li><i class="fa-solid fa-person-circle-plus"></i><a href="{{ route('client.create') }}">Добавить клиента</a></li>
+            <li><i class="fa-solid fa-flag"></i><a href="{{ route('source.create') }}">Добавить источник</a></li>
+{{--            <li><i class="fa-solid fa-users-gear"></i><a href="{{ route('register') }}">Добавить оператора</a></li>--}}
         </ul>
     </div>
     <div class="menu-block">
-        <div class="menu-block__title">Движение средств</div>
+{{--        <div class="menu-block__title">Движение средств</div>--}}
         <ul>
-            <li><i class="fa-solid fa-plus-minus"></i><a href="">Разное (Расход/Доход)</a></li>
+{{--            <li><i class="fa-solid fa-plus-minus"></i><a href="">Разное (Расход/Доход)</a></li>--}}
             <li><i class="fa-solid fa-download"></i><a href="">Запросить средства</a></li>
             <li><i class="fa-solid fa-code-pull-request"></i><a href="">Запросы</a></li>
-            <li><i class="fa-solid fa-square-poll-vertical"></i><a href="">Статистика</a></li>
             <span class="menu-block__separator"></span>
+            <li><i class="fa-solid fa-square-poll-vertical"></i><a href="">Статистика</a></li>
+            <li><i class="fa-solid fa-people-group"></i><a href="{{ route('client.index') }}">Список клиентов</a></li>
             <li><i class="fa-solid fa-gear"></i><a href="">Настройки</a></li>
             <li><i class="fa-solid fa-right-from-bracket"></i>
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                   document.getElementById('logout-form').submit();">
                    Выйти
                 </a>
 

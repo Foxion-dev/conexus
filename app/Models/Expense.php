@@ -19,4 +19,9 @@ class Expense extends Model
         return $this->belongsTo(Currency::class, 'currency_id', 'id'); // находит по связи "один"
     }
 
+    public function workDay()
+    {
+        return $this->belongsTo(WorkDay::class, 'work_day_id', 'id'); // находит по связи "один"
+    }
+
 }

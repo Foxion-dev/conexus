@@ -8,7 +8,7 @@ use App\Models\Expense;
 use App\Models\WorkDay;
 use Illuminate\Http\Request;
 
-class ExpenseController extends Controller
+class ExpenseController extends BaseController
 {
     public function index()
     {
@@ -36,6 +36,10 @@ class ExpenseController extends Controller
 
         $expense = Expense::create($data);
 
+        if($expense->id){
+            OfficeDayController::updateLeftoversFromExpense($expense);
+        }
+
         return redirect()->route('index');
     }
 
@@ -60,7 +64,13 @@ class ExpenseController extends Controller
             'comment' => '',
         ]);
 
+        OfficeDayController::unsetLeftoversFromExpense($expense); // удалим записи в остатки
+
         $expense->update($data);
+
+        if($expense->id){
+            OfficeDayController::updateLeftoversFromExpense($expense);
+        }
 
         return redirect()->route('index');
 
@@ -68,7 +78,7 @@ class ExpenseController extends Controller
 
     public function delete(Expense $expense)
     {
-
+        OfficeDayController::unsetLeftoversFromExpense($expense); // удалим записи в остатки
         $expense->delete();
 
         return redirect()->route('index');
@@ -77,6 +87,7 @@ class ExpenseController extends Controller
     public function destroy(Expense $expense)
     {
 
+        OfficeDayController::unsetLeftoversFromExpense($expense); // удалим записи в остатки
         $expense->delete();
 
         return redirect()->route('index');

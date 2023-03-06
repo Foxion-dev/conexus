@@ -25,8 +25,8 @@ class CreateClientsTable extends Migration
 
             $table->softDeletes(); // подключаем "мягкое удаление"
 
-            $table->index('source_id', 'source_idx');
-            $table->foreign('source_id', 'source_fk')->on('sources')->references('id');
+            $table->index('source_id', 'client_source_idx');
+            $table->foreign('source_id', 'client_source_fk')->on('sources')->references('id');
         });
     }
 

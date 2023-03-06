@@ -6,6 +6,7 @@ use App\Models\Client;
 use App\Models\Currency;
 use App\Models\Deal;
 use App\Models\DealType;
+use App\Models\WorkDay;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class DealFactory extends Factory
@@ -30,6 +31,7 @@ class DealFactory extends Factory
             'commission_on' => random_int(0, 1),
             'receiving_currency_id' => Currency::get()->random()->id,
             'return_currency_id' => Currency::get()->random()->id,
+            'work_day_id' => WorkDay::get()->random()->id,
         ];
     }
 }

@@ -9,7 +9,7 @@ use App\Models\EncashmentType;
 use App\Models\WorkDay;
 use Illuminate\Http\Request;
 
-class EncashmentController extends Controller
+class EncashmentController extends BaseController
 {
     public function index()
     {
@@ -40,6 +40,10 @@ class EncashmentController extends Controller
 
         $encashment = Encashment::create($data);
 
+        if($encashment->id){
+            OfficeDayController::updateLeftoversFromEncashment($encashment);
+        }
+
         return redirect()->route('index');
     }
 
@@ -67,15 +71,20 @@ class EncashmentController extends Controller
             'collector_id' => 'required|integer',
         ]);
 
+        OfficeDayController::unsetLeftoversFromEncashment($encashment);
+
         $encashment->update($data);
 
+        if($encashment->id){
+            OfficeDayController::updateLeftoversFromEncashment($encashment);
+        }
         return redirect()->route('index');
 
     }
 
     public function delete(Encashment $encashment)
     {
-
+        OfficeDayController::unsetLeftoversFromEncashment($encashment);
         $encashment->delete();
 
         return redirect()->route('index');
@@ -83,7 +92,7 @@ class EncashmentController extends Controller
 
     public function destroy(Encashment $encashment)
     {
-
+        OfficeDayController::unsetLeftoversFromEncashment($encashment);
         $encashment->delete();
 
         return redirect()->route('index');
