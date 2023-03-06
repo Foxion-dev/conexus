@@ -18,7 +18,8 @@ class IndexController extends BaseController
 
         $data['clients'] = Client::all();
         $data['work_day'] = WorkDay::find(auth()->user()->work_day_id);
-
+//        $test = Client::search('tele')->get();
+//        dd($test);
         if($data['work_day'] === null) {
             auth()->logout();
         }

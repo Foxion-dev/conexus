@@ -34,4 +34,9 @@ class OfficeDay extends Model
     {
         return $this->belongsTo(Leftovers::class, 'leftovers_id', 'id'); // находит по связи "один"
     }
+
+    public function office()
+    {
+        return $this->belongsTo(Office::class, 'office_id', 'id'); // находит по связи "один"
+    }
 }

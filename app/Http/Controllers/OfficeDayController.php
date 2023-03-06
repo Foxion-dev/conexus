@@ -12,7 +12,7 @@ use Illuminate\Support\Carbon;
 
 class OfficeDayController extends BaseController
 {
-    //
+
     public function findCurrentOfficeDay($officeId)
     {
 
@@ -53,7 +53,6 @@ class OfficeDayController extends BaseController
         return $currentLeftovers->update($leftoversData);
     }
 
-
     public function updateLeftoversFromExpense(Expense $expense)
     {
         $currentLeftovers = $expense->workDay->officeDay->leftovers;
@@ -75,7 +74,6 @@ class OfficeDayController extends BaseController
 
         return $currentLeftovers->update($leftoversData);
     }
-
 
     public function updateLeftoversFromEncashment(Encashment $encashment)
     {

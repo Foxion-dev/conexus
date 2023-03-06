@@ -2275,6 +2275,132 @@ document.addEventListener("DOMContentLoaded", function () {
       this.commissionSumInput.value = this.commissionSum;
     }
   };
+  var clientSearch = {
+    queryInput: document.querySelector('#search-client'),
+    suggestBlock: document.querySelector('#search-suggest'),
+    hiddenClientInput: document.querySelector('#hidden-client-id'),
+    clientBlock: document.querySelector('.deal-form__client'),
+    clientNameInput: document.querySelector('input[name="client_name"]'),
+    clientContactInput: document.querySelector('input[name="client_contact"]'),
+    clientCommentInput: document.querySelector('textarea[name="client_comment"]'),
+    submitBtn: document.querySelector('button[type="submit"]'),
+    clientSourceInput: document.querySelector('select[name="client_source"]'),
+    lengthActive: 3,
+    timeout: 0,
+    url: '/client-search',
+    init: function init() {
+      if (this.timeout) clearTimeout(this.timeout);
+      var changeQueryValue = this.query.bind(this);
+      this.queryInput.addEventListener('input', changeQueryValue);
+    },
+    query: function query(event) {
+      var target = event.target;
+      var value = target.value;
+      if (this.timeout) clearTimeout(this.timeout);
+      if (value.length >= this.lengthActive) {
+        console.log(value);
+        this.request(value);
+      }
+    },
+    request: function request(query) {
+      var _this = this;
+      this.timeout = setTimeout(function () {
+        var params = {
+          method: 'post',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            query: query
+          })
+        };
+        var request = fetch(_this.url, params);
+        request.then(function (req) {
+          return req.json();
+        }).then(function (data) {
+          console.log(data);
+          if (data.length > 0) {
+            console.log(11);
+            _this.cleanVariants();
+            data.forEach(function (elem) {
+              _this.insertVariants(_this.suggestBlock, _this.createVariant(elem));
+            });
+            _this.showSuggest();
+          } else {
+            console.log(2);
+            _this.cleanVariants();
+            _this.hideBottom();
+            _this.insertNotFound();
+            _this.showSuggest();
+          }
+        });
+      }, 500);
+    },
+    cleanVariants: function cleanVariants() {
+      this.suggestBlock.innerHTML = '';
+    },
+    insertVariants: function insertVariants(parent, child) {
+      parent.append(child);
+    },
+    insertNotFound: function insertNotFound() {
+      var node = document.createElement('div');
+      node.classList.add('suggest-list__btn');
+      node.innerHTML = '<a class="btn btn-red" href="/clients/create" target="_blank">Не найдено, добавьте клиента</a>';
+      this.suggestBlock.style.padding = 0;
+      this.suggestBlock.append(node);
+    },
+    createVariant: function createVariant(client) {
+      var _client$id, _client$name, _client$contact, _client$comment, _client$source_id;
+      var clientData = '<b>id</b> - ' + client.id + ' / ' + '<b>Имя</b> - ' + client.name + ' / ' + '<b>Контакт</b> - ' + client.contact;
+      var node = document.createElement('div');
+      var selectSuggestValue = this.selectVariants.bind(this);
+      node.classList.add('suggest-list__item');
+      node.setAttribute('data-id', (_client$id = client.id) !== null && _client$id !== void 0 ? _client$id : '');
+      node.setAttribute('data-name', (_client$name = client.name) !== null && _client$name !== void 0 ? _client$name : '');
+      node.setAttribute('data-contact', (_client$contact = client.contact) !== null && _client$contact !== void 0 ? _client$contact : '');
+      node.setAttribute('data-comment', (_client$comment = client.comment) !== null && _client$comment !== void 0 ? _client$comment : '');
+      node.setAttribute('data-source', (_client$source_id = client.source_id) !== null && _client$source_id !== void 0 ? _client$source_id : '');
+      node.innerHTML = clientData;
+      node.addEventListener('click', selectSuggestValue);
+      return node;
+    },
+    selectVariants: function selectVariants(event) {
+      var _element$getAttribute, _element$getAttribute2, _element$getAttribute3;
+      var target = event.target;
+      var element = target.classList.contains('suggest-list__item') ? target : target.closest('.suggest-list__item');
+      var id = element.getAttribute('data-id');
+      var name = (_element$getAttribute = element.getAttribute('data-name')) !== null && _element$getAttribute !== void 0 ? _element$getAttribute : '';
+      var contact = (_element$getAttribute2 = element.getAttribute('data-contact')) !== null && _element$getAttribute2 !== void 0 ? _element$getAttribute2 : '';
+      var comment = element.getAttribute('data-comment') === null ? '' : element.getAttribute('data-comment');
+      var source = (_element$getAttribute3 = element.getAttribute('data-source')) !== null && _element$getAttribute3 !== void 0 ? _element$getAttribute3 : '';
+      this.queryInput.value = element.textContent;
+      this.clientContactInput.value = contact;
+      this.clientNameInput.value = name;
+      this.clientSourceInput.value = source;
+      this.clientCommentInput.innerHTML = comment;
+      this.hiddenClientInput.innerHTML = id;
+      this.clientSourceInput.querySelectorAll('option').forEach(function (option) {
+        if (option.value === id) option.checked;
+        option.checked = false;
+      });
+      this.hideSuggest();
+      this.showBottom();
+    },
+    showBottom: function showBottom() {
+      if (!this.clientBlock.classList.contains('show')) this.clientBlock.classList.add('show');
+      if (this.submitBtn.classList.contains('btn-disabled')) this.submitBtn.classList.remove('btn-disabled');
+    },
+    hideBottom: function hideBottom() {
+      if (this.clientBlock.classList.contains('show')) this.clientBlock.classList.remove('show');
+      if (!this.submitBtn.classList.contains('btn-disabled')) this.submitBtn.classList.add('btn-disabled');
+    },
+    hideSuggest: function hideSuggest() {
+      this.suggestBlock.classList.remove('show');
+    },
+    showSuggest: function showSuggest() {
+      if (!this.suggestBlock.classList.contains('show')) this.suggestBlock.classList.add('show');
+    }
+  };
 
   /*
   * Кастомный селект
@@ -2304,27 +2430,28 @@ document.addEventListener("DOMContentLoaded", function () {
       this.closeList();
     },
     init: function init() {
-      var _this = this;
+      var _this2 = this;
       if (this.elements.length) {
         this.elements.forEach(function (elem) {
           var toggleNode = elem.querySelector(".select-custom__value");
-          _this.listBlock = elem.querySelector(".select-custom__list");
-          _this.list = _this.listBlock.querySelector("ul");
-          _this.listItems = _this.list.querySelectorAll("li");
-          _this.label = toggleNode.querySelector("label");
-          _this.input = toggleNode.querySelector("input");
-          _this.input.value = "";
-          var chooseBind = _this.chooseValue.bind(_this);
-          _this.listItems.forEach(function (li) {
+          _this2.listBlock = elem.querySelector(".select-custom__list");
+          _this2.list = _this2.listBlock.querySelector("ul");
+          _this2.listItems = _this2.list.querySelectorAll("li");
+          _this2.label = toggleNode.querySelector("label");
+          _this2.input = toggleNode.querySelector("input");
+          _this2.input.value = "";
+          var chooseBind = _this2.chooseValue.bind(_this2);
+          _this2.listItems.forEach(function (li) {
             li.addEventListener("click", chooseBind);
           });
-          var toggleBind = _this.toggleList.bind(_this);
+          var toggleBind = _this2.toggleList.bind(_this2);
           toggleNode.addEventListener("click", toggleBind);
         });
       }
     }
   };
   calculator.init();
+  clientSearch.init();
 });
 
 /***/ }),

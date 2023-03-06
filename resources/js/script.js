@@ -189,6 +189,150 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+
+    const clientSearch = {
+        queryInput: document.querySelector('#search-client'),
+        suggestBlock: document.querySelector('#search-suggest'),
+        hiddenClientInput: document.querySelector('#hidden-client-id'),
+        clientBlock: document.querySelector('.deal-form__client'),
+        clientNameInput: document.querySelector('input[name="client_name"]'),
+        clientContactInput: document.querySelector('input[name="client_contact"]'),
+        clientCommentInput: document.querySelector('textarea[name="client_comment"]'),
+        submitBtn: document.querySelector('button[type="submit"]'),
+        clientSourceInput: document.querySelector('select[name="client_source"]'),
+        lengthActive: 3,
+        timeout:0,
+        url: '/client-search',
+        init(){
+            if(this.timeout)  clearTimeout(this.timeout)
+
+            const changeQueryValue = this.query.bind(this);
+
+            this.queryInput.addEventListener('input', changeQueryValue)
+        },
+        query(event){
+            const {target} = event
+            const value = target.value
+
+            if(this.timeout)  clearTimeout(this.timeout)
+
+            if(value.length >= this.lengthActive){
+                console.log(value);
+                this.request(value)
+            }
+
+        },
+        request(query){
+            this.timeout = setTimeout(() => {
+                const params = {
+                    method: 'post',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        query: query
+                    })
+                }
+                const request = fetch(this.url, params)
+                request.then(req => req.json())
+                    .then(data => {
+                        console.log(data)
+                        if (data.length > 0) {
+                            console.log(11)
+
+                            this.cleanVariants()
+                            data.forEach(elem => {
+                                this.insertVariants(this.suggestBlock, this.createVariant(elem))
+                            })
+                            this.showSuggest()
+                        }else{
+                            console.log(2)
+                            this.cleanVariants()
+                            this.hideBottom()
+                            this.insertNotFound()
+                            this.showSuggest()
+                        }
+                    })
+            }, 500)
+        },
+        cleanVariants(){
+            this.suggestBlock.innerHTML = '';
+        },
+        insertVariants(parent, child) {
+            parent.append(child)
+        },
+        insertNotFound() {
+            const node = document.createElement('div')
+
+            node.classList.add('suggest-list__btn')
+            node.innerHTML = '<a class="btn btn-red" href="/clients/create" target="_blank">Не найдено, добавьте клиента</a>'
+
+            this.suggestBlock.style.padding = 0
+            this.suggestBlock.append(node)
+        },
+        createVariant(client) {
+
+            const clientData = '<b>id</b> - ' + client.id + ' / ' +
+                '<b>Имя</b> - ' + client.name + ' / ' +
+                '<b>Контакт</b> - ' + client.contact;
+            const node = document.createElement('div')
+            const selectSuggestValue = this.selectVariants.bind(this);
+
+            node.classList.add('suggest-list__item')
+            node.setAttribute('data-id', client.id ?? '')
+            node.setAttribute('data-name', client.name ?? '')
+            node.setAttribute('data-contact', client.contact ?? '')
+            node.setAttribute('data-comment', client.comment ?? '')
+            node.setAttribute('data-source', client.source_id ?? '')
+
+            node.innerHTML = clientData
+            node.addEventListener('click', selectSuggestValue)
+
+            return node
+        },
+        selectVariants(event){
+
+            const {target} = event
+            const element = target.classList.contains('suggest-list__item') ? target : target.closest('.suggest-list__item')
+
+            const id = element.getAttribute('data-id')
+            const name = element.getAttribute('data-name') ?? ''
+            const contact = element.getAttribute('data-contact') ?? ''
+            const comment = element.getAttribute('data-comment') === null ? '' : element.getAttribute('data-comment')
+            const source = element.getAttribute('data-source') ?? ''
+
+            this.queryInput.value = element.textContent
+            this.clientContactInput.value = contact
+            this.clientNameInput.value = name
+            this.clientSourceInput.value = source
+            this.clientCommentInput.innerHTML = comment
+            this.hiddenClientInput.innerHTML = id
+
+            this.clientSourceInput.querySelectorAll('option').forEach((option) => {
+                if(option.value === id) option.checked
+                option.checked = false
+            })
+
+            this.hideSuggest()
+            this.showBottom()
+
+        },
+        showBottom(){
+            if(!this.clientBlock.classList.contains('show')) this.clientBlock.classList.add('show')
+            if(this.submitBtn.classList.contains('btn-disabled')) this.submitBtn.classList.remove('btn-disabled')
+        },
+        hideBottom(){
+            if(this.clientBlock.classList.contains('show')) this.clientBlock.classList.remove('show')
+            if(!this.submitBtn.classList.contains('btn-disabled')) this.submitBtn.classList.add('btn-disabled')
+        },
+        hideSuggest(){
+            this.suggestBlock.classList.remove('show')
+        },
+        showSuggest(){
+            if(!this.suggestBlock.classList.contains('show')) this.suggestBlock.classList.add('show')
+        }
+    }
+
     /*
     * Кастомный селект
     * */
@@ -239,4 +383,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     calculator.init();
+    clientSearch.init();
 });

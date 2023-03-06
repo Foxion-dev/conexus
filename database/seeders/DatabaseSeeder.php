@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Http\Controllers\RequestMoneyController;
 use App\Models\Client;
 use App\Models\Collector;
 use App\Models\Commission;
@@ -12,6 +13,7 @@ use App\Models\EncashmentType;
 use App\Models\Leftovers;
 use App\Models\Office;
 use App\Models\OfficeDay;
+use App\Models\RequestMoneyStatus;
 use App\Models\Source;
 use App\Models\User;
 use App\Models\WorkDay;
@@ -29,6 +31,7 @@ class DatabaseSeeder extends Seeder
         $currencies = ['USD', 'KZT', 'USDT', 'GEL'];
         $sources = ['улица', 'inst', 'telegram', 'друг', 'таргет'];
         $dealTypes = ['Продажа', 'Покупка'];
+        $requestStatuses = ['Запрос отправлен', 'В процессе', 'Выполнен', 'Отклонён'];
         $encashmentTypes = ['Приход', 'Расход'];
         $offices = ['Батуми', 'Тбилиси', 'Кабулети', 'Стамбул', 'Киев'];
 
@@ -61,6 +64,12 @@ class DatabaseSeeder extends Seeder
             Office::firstOrCreate(
                 ['name' => $office],
                 ['name' => $office]
+            );
+        }
+        foreach ($requestStatuses as $status) {
+            RequestMoneyStatus::firstOrCreate(
+                ['title' => $status],
+                ['title' => $status]
             );
         }
 

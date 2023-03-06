@@ -44,6 +44,7 @@ class DealController extends BaseController
             'amount_commission' => 'string',
             'issuance_amount' => 'string',
             'edit_commission' => '',
+            'client_id' => '',
             'client_contact' => 'required|string',
             'client_name' => '',
             'client_comment' => '',
@@ -58,17 +59,22 @@ class DealController extends BaseController
             $commissionOn = true;
         }
 
-        $clientData = [
-            'name' => $data['client_name'],
-            'contact' => $data['client_contact'],
-            'comment' => $data['client_comment'],
-            'source_id' => $data['client_source'],
-        ];
+        if(!$data['client_id']){
+            $clientData = [
+                'name' => $data['client_name'],
+                'contact' => $data['client_contact'],
+                'comment' => $data['client_comment'],
+                'source_id' => $data['client_source'],
+            ];
 
-        $client = Client::firstOrCreate(
-            ['name' => $data['client_name']],
-            $clientData
-        );
+            $client = Client::firstOrCreate(
+                ['name' => $data['client_name']],
+                $clientData
+            );
+
+            $data['client_id'] = $client->id;
+        }
+
 
         switch ($data["type_id"]){
             case 1: // Продажа (клиент нам продаёт крипту)
@@ -104,7 +110,7 @@ class DealController extends BaseController
 //        dd($data);
         $dealData = [
             'deal_type_id' => $data["type_id"] ?? null,
-            'client_id' => $client->id ?? null,
+            'client_id' => $data['client_id'] ?? null,
             'amount' => $data["amount"] ?? null,
             'issuance_amount' => $data["issuance_amount"] ?? null,
             'receiving_sum' => $data["receiving_sum"] ?? null,
@@ -160,6 +166,7 @@ class DealController extends BaseController
             'amount_commission' => 'string',
             'issuance_amount' => 'string',
             'edit_commission' => '',
+            'client_id' => '',
             'client_contact' => 'required|string',
             'client_name' => '',
             'client_comment' => '',
@@ -173,18 +180,21 @@ class DealController extends BaseController
         if(isset($data["commission_on"])){
             $commissionOn = true;
         }
+        if(!$data['client_id']){
+            $clientData = [
+                'name' => $data['client_name'],
+                'contact' => $data['client_contact'],
+                'comment' => $data['client_comment'],
+                'source_id' => $data['client_source'],
+            ];
 
-        $clientData = [
-            'name' => $data['client_name'],
-            'contact' => $data['client_contact'],
-            'comment' => $data['client_comment'],
-            'source_id' => $data['client_source'],
-        ];
+            $client = Client::firstOrCreate(
+                ['name' => $data['client_name']],
+                $clientData
+            );
 
-        $client = Client::firstOrCreate(
-            ['name' => $data['client_name']],
-            $clientData
-        );
+            $data['client_id'] = $client->id;
+        }
 
         switch ($data["type_id"]){
             case 1: // Продажа (клиент нам продаёт крипту)
@@ -220,7 +230,7 @@ class DealController extends BaseController
 
         $dealData = [
             'deal_type_id' => $data["type_id"] ?? null,
-            'client_id' => $client->id ?? null,
+            'client_id' => $data['client_id'] ?? null,
             'amount' => $data["amount"] ?? null,
             'issuance_amount' => $data["issuance_amount"] ?? null,
             'receiving_sum' => $data["receiving_sum"] ?? null,

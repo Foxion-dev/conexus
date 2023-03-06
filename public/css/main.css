@@ -279,7 +279,11 @@ i {
 }
 .btn.btn-white {
   background-color: #000;
-  color: #000;
+  color: #fff;
+}
+.btn.btn-disabled {
+  opacity: 0.25;
+  pointer-events: none;
 }
 
 .default-form {
@@ -309,6 +313,9 @@ i {
   width: 100%;
   color: #1a202c;
   margin-bottom: 10px;
+}
+.form-input--rel {
+  position: relative;
 }
 .form-input label {
   margin-bottom: 10px;
@@ -372,6 +379,10 @@ i {
 .form-input select.is-invalid {
   border: 2px solid red;
 }
+.form-input select:disabled, .form-input select.disabled {
+  background: #918f8f;
+  pointer-events: none;
+}
 .form-input textarea {
   background: #e3e3e3;
   max-width: 100%;
@@ -385,9 +396,41 @@ i {
 .form-input textarea.is-invalid {
   border: 2px solid red;
 }
+.form-input textarea:disabled, .form-input textarea.disabled {
+  background: #918f8f;
+  pointer-events: none;
+}
 .form-input button {
   color: #fff;
 }
+.suggest-list {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 80px;
+  padding: 10px 0;
+  background: #fff;
+  color: #1a202c;
+  opacity: 0;
+  z-index: -1;
+}
+.suggest-list.show {
+  opacity: 1;
+  z-index: 1;
+}
+.suggest-list__item {
+  color: #1a202c;
+  border-bottom: 1px solid #000;
+  padding: 5px;
+  cursor: pointer;
+}
+.suggest-list__item:hover {
+  background: #ccc;
+}
+.suggest-list__item b {
+  color: #1a202c;
+}
+
 .flex-body {
   display: flex;
   justify-content: flex-start;
@@ -570,6 +613,19 @@ i {
 .deal-form__type-result {
   text-transform: uppercase;
   text-align: center;
+}
+.deal-form__search {
+  max-width: 100%;
+  width: 100%;
+}
+.deal-form__search .form-input {
+  margin-bottom: 30px;
+}
+.deal-form__client {
+  display: none;
+}
+.deal-form__client.show {
+  display: block;
 }
 
 .deal-calculator {

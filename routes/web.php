@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -57,16 +58,31 @@ Route::patch('clients/{client}', [App\Http\Controllers\ClientController::class, 
 Route::delete('clients/{client}', [App\Http\Controllers\ClientController::class, 'destroy'])->name('client.destroy');
 
 
-Route::get('/sources', [App\Http\Controllers\SourceController::class, 'index'])->name('source.index');
+
 Route::get('/sources/create', [App\Http\Controllers\SourceController::class, 'create'])->name('source.create');
 Route::post('sources', [App\Http\Controllers\SourceController::class, 'store'])->name('source.store');
-Route::patch('sources/{source}', [App\Http\Controllers\SourceController::class, 'update'])->name('source.update');
 Route::delete('sources/{source}', [App\Http\Controllers\SourceController::class, 'destroy'])->name('source.destroy');
+
+Route::get('/collectors/create', [App\Http\Controllers\CollectorController::class, 'create'])->name('collector.create');
+Route::post('collectors', [App\Http\Controllers\CollectorController::class, 'store'])->name('collector.store');
+Route::delete('collectors/{collector}', [App\Http\Controllers\CollectorController::class, 'destroy'])->name('collector.destroy');
 
 Route::get('commissions/edit', [App\Http\Controllers\CommissionController::class, 'edit'])->name('commissions.edit');
 Route::patch('commissions/edit', [App\Http\Controllers\CommissionController::class, 'update'])->name('commissions.update');
 
 
+Route::get('/requests', [App\Http\Controllers\RequestMoneyController::class, 'index'])->name('requestMoney.index');
+Route::get('/requests/create', [App\Http\Controllers\RequestMoneyController::class, 'create'])->name('requestMoney.create');
+Route::post('requests', [App\Http\Controllers\RequestMoneyController::class, 'store'])->name('requestMoney.store');
+//Route::get('requests/{request}', [App\Http\Controllers\RequestController::class, 'show'])->name('request.show');
+//Route::get('requests/{request}/edit', [App\Http\Controllers\RequestController::class, 'edit'])->name('request.edit');
+//Route::patch('requests/{request}', [App\Http\Controllers\RequestController::class, 'update'])->name('request.update');
+Route::delete('requests/{request}', [App\Http\Controllers\RequestMoneyController::class, 'destroy'])->name('requestMoney.destroy');
+
+// requests
+Route::post('/client-search', function (Request $request) {
+    return \App\Models\Client::search($request->input('query'))->get();
+});
 
 //Route::group(['namespace' => 'App\Http\Controllers\Deal'], function (){
 //

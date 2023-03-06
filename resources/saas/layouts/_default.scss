@@ -178,8 +178,16 @@ i{
     }
     &.btn-white{
         background-color: #000;
-        color: #000;
+        color: #fff;
     }
+    &.btn-disabled{
+        opacity: .25;
+        pointer-events: none;
+    }
+    //&.btn-reverse{
+    //    background-color: #000;
+    //    color: #fff;
+    //}
 }
 
 .default-form{
@@ -209,6 +217,9 @@ i{
     width: 100%;
     color: $defaultColorText;
     margin-bottom: 10px;
+    &--rel{
+        position: relative;
+    }
     label{
         margin-bottom: 10px;
         font-size: 18px;
@@ -271,6 +282,10 @@ i{
         &.is-invalid{
             border: 2px solid $warn;
         }
+        &:disabled, &.disabled{
+            background: $inputBGDisabled;
+            pointer-events: none;
+        }
     }
     textarea{
         background: $inputBG;
@@ -284,6 +299,10 @@ i{
         &.is-invalid{
             border: 2px solid $warn;
         }
+        &:disabled, &.disabled{
+            background: $inputBGDisabled;
+            pointer-events: none;
+        }
     }
     button{
         color: $defaultColorWhite;
@@ -291,6 +310,35 @@ i{
 
     &--checkbox{
 
+    }
+}
+
+.suggest-list{
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 80px;
+    padding: 10px 0;
+    background: $defaultColorWhite;
+    color: $defaultColorText;
+    opacity: 0;
+    z-index: -1;
+    &.show{
+        opacity: 1;
+        z-index: 1;
+    }
+    &__item{
+        color: $defaultColorText;
+        border-bottom: 1px solid $border;
+        padding: 5px;
+        cursor: pointer;
+        &:hover{
+            background: #ccc;
+        }
+        b{
+            color: $defaultColorText;
+
+        }
     }
 }
 

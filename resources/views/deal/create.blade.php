@@ -118,25 +118,34 @@
             </div>
         </div>
 
-        <div class="deal-form__client client-card">
+        <div class="deal-form__search">
+            <div class="form-input form-input--rel">
+                <label for="client_search">Поиск клиента</label>
+                <input type="text" id="search-client" autocomplete="off" name="client_search" value="" >
+                <input type="hidden" name="client_id" id="hidden-client-id">
+                <div id="search-suggest" class="suggest-list"></div>
+            </div>
+        </div>
+
+        <div class="deal-form__client client-card ">
             <div class="client-card__title">Информация о клиенте</div>
 
             <div class="client-card__row flex-body">
 
                 <div class="form-input">
                     <label for="client_contact"></label>
-                    <input type="text" class="@error('client_contact') is-invalid @enderror" name="client_contact"value="{{ old("client_contact") }}" >
+                    <input type="text" class="@error('client_contact') is-invalid @enderror disabled" name="client_contact"value="{{ old("client_contact") }}" >
 
                     @error('client_contact')
                     <span class="form-input__error" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
+                        <strong>{{ $message }}</strong>
+                    </span>
                     @enderror
 
                 </div>
                 <div class="form-input">
                     <label for="client_name"></label>
-                    <input type="text" class="@error('client_name') is-invalid @enderror" name="client_name" value="{{old("client_name")}}" >
+                    <input type="text" class="@error('client_name') is-invalid @enderror disabled" name="client_name" value="{{old("client_name")}}" >
 
                     @error('client_name')
                     <span class="form-input__error" role="alert">
@@ -150,7 +159,7 @@
 
                 <div class="form-input">
                     <label for="client_comment"></label>
-                    <textarea type="text" class="@error('client_comment') is-invalid @enderror" name="client_comment">{{ old("client_comment") }}</textarea>
+                    <textarea type="text" class="@error('client_comment') is-invalid @enderror disabled" name="client_comment">{{ old("client_comment") }}</textarea>
 
                     @error('client_comment')
                     <span class="form-input__error" role="alert">
@@ -161,7 +170,7 @@
                 </div>
                 <div class="form-input">
                     <label for="client_source"></label>
-                    <select name="client_source" value="{{ old("client_source") }}" class="@error('client_source') is-invalid @enderror">
+                    <select name="client_source" value="{{ old("client_source") }}" class="@error('client_source') is-invalid @enderror disabled">
                         @foreach($clientSources as $source)
                             <option value="{{ $source->id }}">{{ $source->title }}</option>
                         @endforeach
@@ -178,7 +187,7 @@
 
         <div class="form-input">
             <label for="client_source"></label>
-            <button type="submit" class="btn" >Сделка совершена</button>
+            <button type="submit" class="btn btn-disabled" >Сделка совершена</button>
         </div>
 
     </form>
