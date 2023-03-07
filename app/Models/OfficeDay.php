@@ -39,4 +39,10 @@ class OfficeDay extends Model
     {
         return $this->belongsTo(Office::class, 'office_id', 'id'); // находит по связи "один"
     }
+
+
+    public function days()
+    {
+        return $this->hasMany(WorkDay::class, 'office_day_id', 'id'); // находит по связи "один"
+    }
 }

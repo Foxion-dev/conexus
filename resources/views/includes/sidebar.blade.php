@@ -22,7 +22,9 @@
             <li><i class="fa-solid fa-download"></i><a href="{{ route('requestMoney.create') }}">Запросить средства</a></li>
             <li><i class="fa-solid fa-code-pull-request"></i><a href="{{ route('requestMoney.index') }}">Запросы</a></li>
             <span class="menu-block__separator"></span>
+{{--            <li><i class="fa-solid fa-users-gear"></i><a href="{{ route('register') }}">Добавить оператора</a></li>--}}
             <li><i class="fa-solid fa-person-circle-plus"></i><a href="{{ route('collector.create') }}">Добавить инкассатора</a></li>
+            <li><i class="fa-solid fa-house-laptop"></i><a href="{{ route('office.create') }}">Добавить офис</a></li>
             <li><i class="fa-solid fa-clock-rotate-left"></i><a href="{{ route('history') }}">История</a></li>
             <li><i class="fa-solid fa-square-poll-vertical"></i><a href="">Статистика</a></li>
             <li><i class="fa-solid fa-people-group"></i><a href="{{ route('client.index') }}">Список клиентов</a></li>

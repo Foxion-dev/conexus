@@ -320,6 +320,9 @@ i {
 .form-input--rel {
   position: relative;
 }
+.form-input--hide {
+  display: none;
+}
 .form-input label {
   margin-bottom: 10px;
   font-size: 18px;
@@ -478,6 +481,15 @@ i {
   justify-content: center;
   align-items: center;
 }
+.operations__grid-titles div.green, .operations__grid-row div.green {
+  background-color: green;
+}
+.operations__grid-titles div.red, .operations__grid-row div.red {
+  background-color: red;
+}
+.operations__grid-titles div.blue, .operations__grid-row div.blue {
+  background-color: cadetblue;
+}
 .operations__grid-titles {
   padding-bottom: 15px;
   margin-bottom: 10px;
@@ -500,6 +512,12 @@ i {
 }
 .operations--sources .operations__grid-titles, .operations--sources .operations__grid-row {
   grid-template-columns: repeat(3, 1fr);
+}
+.operations--requests .operations__grid-titles, .operations--requests .operations__grid-row {
+  grid-template-columns: repeat(9, 1fr);
+}
+.operations--offices .operations__grid-titles, .operations--offices .operations__grid-row {
+  grid-template-columns: repeat(2, 1fr);
 }
 
 .actions i {

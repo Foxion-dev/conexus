@@ -33,17 +33,19 @@
                     <ul class="auth-menu">
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
-                                <li>
-                                    <a href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
+                            <h1>Авторизация</h1>
 
-                            @if (Route::has('register'))
-                                <li>
-                                    <a href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
+                            {{--                            @if (Route::has('login'))--}}
+{{--                                <li>--}}
+{{--                                    <a href="{{ route('login') }}">{{ __('Login') }}</a>--}}
+{{--                                </li>--}}
+{{--                            @endif--}}
+
+{{--                            @if (Route::has('register'))--}}
+{{--                                <li>--}}
+{{--                                    <a href="{{ route('register') }}">{{ __('Register') }}</a>--}}
+{{--                                </li>--}}
+{{--                            @endif--}}
 {{--                        @else--}}
 {{--                            <li class="nav-item dropdown">--}}
 {{--                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>--}}

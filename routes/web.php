@@ -79,10 +79,29 @@ Route::post('requests', [App\Http\Controllers\RequestMoneyController::class, 'st
 //Route::patch('requests/{request}', [App\Http\Controllers\RequestController::class, 'update'])->name('request.update');
 Route::delete('requests/{request}', [App\Http\Controllers\RequestMoneyController::class, 'destroy'])->name('requestMoney.destroy');
 
+Route::get('/offices/create', [App\Http\Controllers\OfficeController::class, 'create'])->name('office.create');
+Route::post('offices', [App\Http\Controllers\OfficeController::class, 'store'])->name('office.store');
+
+
+
 // requests
 Route::post('/client-search', function (Request $request) {
     return \App\Models\Client::search($request->input('query'))->get();
 });
+
+Route::get('/close-work-day', [App\Http\Controllers\WorkDayController::class, 'close'])->name('day.close');
+Route::get('/close-office-day', [App\Http\Controllers\OfficeDayController::class, 'close'])->name('office.close');
+Route::get('/warning-message', [App\Http\Controllers\OfficeDayController::class, 'warning'])->name('warning.message');
+
+
+
+//Route::get('/close-work-day', function (Request $request) {
+//    return \App\Models\WorkDay::close($request);
+//})->name('day.close');
+//
+//Route::get('/close-office-day', function (Request $request) {
+//    return \App\Models\OfficeDay::close($request);
+//})->name('office.close');
 
 //Route::group(['namespace' => 'App\Http\Controllers\Deal'], function (){
 //

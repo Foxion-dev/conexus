@@ -122,14 +122,14 @@
         @endif
         <div class="dashboard__buttons">
             <div class="dashboard__buttons-row">
-                <a href="" class="btn btn-default"><i class="fa-solid fa-lock"></i> <span>Закрыть день</span></a>
-                <a href="" class="btn btn-default"><i class="fa-solid fa-house-lock"></i> Закрыть смену</a>
+                <a href="{{ route('office.close') }}" class="btn btn-default"><i class="fa-solid fa-lock"></i> <span>Закрыть день</span></a>
+                <a href="{{ route('day.close') }}" class="btn btn-default"><i class="fa-solid fa-house-lock"></i> Закрыть смену</a>
             </div>
+{{--            <div class="dashboard__buttons-row">--}}
+{{--                <a href="" class="btn btn-default"><i class="fa-solid fa-arrow-right-arrow-left"></i>Обмен валюты</a>--}}
+{{--            </div>--}}
             <div class="dashboard__buttons-row">
-                <a href="" class="btn btn-default"><i class="fa-solid fa-arrow-right-arrow-left"></i>Обмен валюты</a>
-            </div>
-            <div class="dashboard__buttons-row">
-                <a href="" class="btn btn-red"><i class="fa-solid fa-triangle-exclamation"></i> Обнаружено несоответствие</a>
+                <a href="{{ route('warning.message') }}" class="btn btn-red"><i class="fa-solid fa-triangle-exclamation"></i> Обнаружено несоответствие</a>
             </div>
         </div>
     </div>

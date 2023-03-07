@@ -19,10 +19,16 @@ class IndexController extends BaseController
         $data['clients'] = Client::all();
         $data['work_day'] = WorkDay::find(auth()->user()->work_day_id);
 //        $test = Client::search('tele')->get();
-//        dd($test);
+//        dd($data);
         if($data['work_day'] === null) {
             auth()->logout();
+            return redirect()->route('login');
         }
+
+        if(!is_null($data['work_day']->finish)){
+            return view('closed', compact('data'));
+        }
+
         $this->current_day = $data['work_day'];
         $data['deals'] = $data['work_day']->deals->take(-3)->sortByDesc('created_at');
         $data['expenses'] = $data['work_day']->expenses->take(-3)->sortByDesc('created_at');

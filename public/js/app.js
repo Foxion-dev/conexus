@@ -2107,6 +2107,12 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
   \********************************/
 /***/ (() => {
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i]; return arr2; }
 document.addEventListener("DOMContentLoaded", function () {
   var calculator = {
     buttonCalc: document.querySelector('#calc-btn'),
@@ -2289,9 +2295,11 @@ document.addEventListener("DOMContentLoaded", function () {
     timeout: 0,
     url: '/client-search',
     init: function init() {
-      if (this.timeout) clearTimeout(this.timeout);
-      var changeQueryValue = this.query.bind(this);
-      this.queryInput.addEventListener('input', changeQueryValue);
+      if (this.queryInput !== null) {
+        if (this.timeout) clearTimeout(this.timeout);
+        var changeQueryValue = this.query.bind(this);
+        this.queryInput.addEventListener('input', changeQueryValue);
+      }
     },
     query: function query(event) {
       var target = event.target;
@@ -2401,7 +2409,38 @@ document.addEventListener("DOMContentLoaded", function () {
       if (!this.suggestBlock.classList.contains('show')) this.suggestBlock.classList.add('show');
     }
   };
-
+  var requestMoney = {
+    currencySelect: document.querySelector('.js-request-money-currency-select'),
+    currencyOptions: document.querySelectorAll('.js-request-money-currency-select option'),
+    collectorSelect: document.querySelector('.js-request-money-collector-select'),
+    init: function init() {
+      if (this.currencySelect !== null) {
+        this.checkCurrency();
+        var changeCurrencyValue = this.changeCurrency.bind(this);
+        this.currencyOptions.forEach(function (option) {
+          option.addEventListener('click', changeCurrencyValue);
+        });
+      }
+    },
+    checkCurrency: function checkCurrency() {
+      var currentOption = _toConsumableArray(this.currencyOptions).filter(function (option) {
+        return option.selected;
+      })[0];
+      if (currentOption.getAttribute('data-cash') == 1) {
+        if (this.collectorSelect.closest('.form-input').classList.contains('form-input--hide')) this.collectorSelect.closest('.form-input').classList.remove('form-input--hide');
+      } else {
+        if (!this.collectorSelect.closest('.form-input').classList.contains('form-input--hide')) this.collectorSelect.closest('.form-input').classList.add('form-input--hide');
+      }
+    },
+    changeCurrency: function changeCurrency(event) {
+      var target = event.target;
+      if (target.getAttribute('data-cash') == 1) {
+        if (this.collectorSelect.closest('.form-input').classList.contains('form-input--hide')) this.collectorSelect.closest('.form-input').classList.remove('form-input--hide');
+      } else {
+        if (!this.collectorSelect.closest('.form-input').classList.contains('form-input--hide')) this.collectorSelect.closest('.form-input').classList.add('form-input--hide');
+      }
+    }
+  };
   /*
   * Кастомный селект
   * */
@@ -2452,6 +2491,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
   calculator.init();
   clientSearch.init();
+  requestMoney.init();
 });
 
 /***/ }),

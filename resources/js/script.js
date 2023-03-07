@@ -204,11 +204,14 @@ document.addEventListener("DOMContentLoaded", () => {
         timeout:0,
         url: '/client-search',
         init(){
-            if(this.timeout)  clearTimeout(this.timeout)
+            if(this.queryInput !== null){
 
-            const changeQueryValue = this.query.bind(this);
+                if(this.timeout)  clearTimeout(this.timeout)
 
-            this.queryInput.addEventListener('input', changeQueryValue)
+                const changeQueryValue = this.query.bind(this);
+
+                this.queryInput.addEventListener('input', changeQueryValue)
+            }
         },
         query(event){
             const {target} = event
@@ -333,6 +336,39 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    const requestMoney = {
+        currencySelect: document.querySelector('.js-request-money-currency-select'),
+        currencyOptions: document.querySelectorAll('.js-request-money-currency-select option'),
+        collectorSelect: document.querySelector('.js-request-money-collector-select'),
+        init(){
+            if(this.currencySelect !== null){
+
+                this.checkCurrency()
+                const changeCurrencyValue = this.changeCurrency.bind(this);
+                this.currencyOptions.forEach((option) => {
+                    option.addEventListener('click', changeCurrencyValue)
+                })
+            }
+        },
+        checkCurrency(){
+
+            const currentOption = [...this.currencyOptions].filter(option => option.selected )[0];
+            if(currentOption.getAttribute('data-cash') == 1){
+                if(this.collectorSelect.closest('.form-input').classList.contains('form-input--hide')) this.collectorSelect.closest('.form-input').classList.remove('form-input--hide')
+            }else{
+                if(!this.collectorSelect.closest('.form-input').classList.contains('form-input--hide')) this.collectorSelect.closest('.form-input').classList.add('form-input--hide')
+            }
+        },
+        changeCurrency(event){
+            const {target} = event
+
+            if(target.getAttribute('data-cash') == 1){
+                if(this.collectorSelect.closest('.form-input').classList.contains('form-input--hide')) this.collectorSelect.closest('.form-input').classList.remove('form-input--hide')
+            }else{
+                if(!this.collectorSelect.closest('.form-input').classList.contains('form-input--hide')) this.collectorSelect.closest('.form-input').classList.add('form-input--hide')
+            }
+        },
+    }
     /*
     * Кастомный селект
     * */
@@ -384,4 +420,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     calculator.init();
     clientSearch.init();
+    requestMoney.init();
+
 });

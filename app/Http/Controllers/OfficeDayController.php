@@ -7,8 +7,11 @@ use App\Models\Deal;
 use App\Models\Encashment;
 use App\Models\Expense;
 use App\Models\OfficeDay;
+use App\Models\User;
+use App\Models\WorkDay;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class OfficeDayController extends BaseController
 {
@@ -95,5 +98,34 @@ class OfficeDayController extends BaseController
         $leftoversData[$currency] = $encashment->type_id == 1 ? $currentLeftovers->$currency - $encashment->amount : $currentLeftovers->$currency + $encashment->amount ;
 
         return $currentLeftovers->update($leftoversData);
+    }
+
+    public function close()
+    {
+        $workDay = WorkDay::find(auth()->user()->work_day_id);
+        $currentUser = User::find(auth()->user()->id);
+        $officeDay = $workDay->officeDay;
+
+        if($workDay && $officeDay){
+            $days = $officeDay->days;
+
+            foreach ($days as $day) {
+
+                $day->update(['finish' => \Carbon\Carbon::now()]);
+                $user = User::find($day->user_id);
+                $user->update(['work_day_id' => null]);
+
+                if($user->id != $currentUser->id){
+                    Auth::setUser($user);
+                    Auth::logout();
+                }
+            }
+
+            $officeDay->update(['finish' => \Carbon\Carbon::now()]);
+        }
+
+        Auth::setUser($currentUser);
+        $data['work_day'] = $workDay;
+        return view('closed', compact('data'));
     }
 }

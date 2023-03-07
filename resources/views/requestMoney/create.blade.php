@@ -3,66 +3,64 @@
     <form action="{{ route('requestMoney.store') }}" method="post" class="default-form deal-form" enctype="multipart/form-data">
         @csrf
 
-        <div class="form-input ">
-            <label for="name">Имя</label>
-            <input  type="text" class="@error('name') is-invalid @enderror" name="name" placeholder="Введите имя" value="{{ old("name") }}" >
-            @error('name')
-            <span class="form-input__error" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-        </div>
-
-        <div class="form-input ">
-            <label for="name">Контакт</label>
-            <input  type="text" class="@error('contact') is-invalid @enderror" name="contact" placeholder="Введите контакт" value="{{ old("contact") }}" >
-            @error('contact')
-            <span class="form-input__error" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-        </div>
-
-        <div class="form-input ">
-            <label for="person_photo" class="file-label">Загрузить фото</label>
-            <input  type="file" id="person_photo" accept="image/*" class="@error('person_photo') is-invalid @enderror" name="person_photo" placeholder="Добавить фото" value="{{ old("person_photo") }}" >
-            @error('person_photo')
-            <span class="form-input__error" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-        </div>
-
-        <div class="form-input ">
-            <label for="person_documents"  class="file-label">Загрузить документ</label>
-            <input type="file" id="person_documents" accept="image/*" class="@error('person_documents') is-invalid @enderror" name="person_documents" placeholder="Добавить документ" value="{{ old("person_documents") }}" >
-            @error('person_documents')
-            <span class="form-input__error" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
-            @enderror
-        </div>
-
-{{--        <div class="form-input">--}}
-{{--            <label for="type">Источник:</label>--}}
-{{--            <select name="source_id" class="@error('source_id') is-invalid @enderror">--}}
-{{--                <option value="">Не выбрано</option>--}}
-{{--                @foreach($sources as $source)--}}
-{{--                    <option value="{{ $source->id }}">{{ $source->title }}</option>--}}
-{{--                @endforeach--}}
-{{--            </select>--}}
-
-{{--            @error('source_id')--}}
-{{--            <span class="form-input__error" role="alert">--}}
-{{--                <strong>{{ $message }}</strong>--}}
-{{--            </span>--}}
-{{--            @enderror--}}
-{{--        </div>--}}
         <div class="form-input">
-            <label for="comment">Комментарий</label>
-            <textarea type="text" class="@error('comment') is-invalid @enderror" name="comment">{{ old("comment") }}</textarea>
+            <label for="currency_id">Валюта:</label>
+            <select name="currency_id" class="@error('currency_id') is-invalid @enderror js-request-money-currency-select">
+                <option value="">Не выбрано </option>
+                @foreach($currencies as $currency)
+                    <option {{ old('currency_id') == $currency->id ? 'selected' : '' }}
+                        value="{{ $currency->id }}" {{ in_array($currency->id, $cashCurrency) ? ' data-cash=1 ' :'' }}>{{ $currency->title }}</option>
+                @endforeach
+            </select>
 
-            @error('comment')
+            @error('currency_id')
+            <span class="form-input__error" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+
+        <div class="form-input ">
+            <label for="amount">Сумма</label>
+            <input  type="text" class="@error('amount') is-invalid @enderror" name="amount" placeholder="Введите сумму" value="{{  old("amount") }}" >
+            @error('amount')
+            <span class="form-input__error" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+
+
+        <div class="form-input">
+            <label for="request_office_id">Офис:</label>
+            <select name="request_office_id" class="@error('request_office_id') is-invalid @enderror">
+                <option value="">Не выбрано</option>
+                @foreach($offices as $office)
+                    @if($office->id !== $currentOffice->id)
+                        <option {{ old('request_office_id') == $office->id ? 'selected' : '' }}
+                            value="{{ $office->id }}">{{ $office->name }}</option>
+                    @endif
+                @endforeach
+            </select>
+
+            @error('request_office_id')
+            <span class="form-input__error" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+        </div>
+
+        <div class="form-input form-input--hide ">
+            <label for="collector_id">Инкассатор:</label>
+            <select name="collector_id" class="@error('collector_id') is-invalid @enderror js-request-money-collector-select">
+                <option value="">Не выбрано</option>
+                @foreach($collectors as $collector)
+                    <option {{ old('collector_id') == $collector->id ? 'selected' : '' }}
+                        value="{{ $collector->id }}">{{ $collector->name }}</option>
+                @endforeach
+            </select>
+
+            @error('collector_id')
             <span class="form-input__error" role="alert">
                 <strong>{{ $message }}</strong>
             </span>

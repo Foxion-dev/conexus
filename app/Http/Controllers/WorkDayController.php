@@ -69,18 +69,11 @@ class WorkDayController extends BaseController
             return redirect()->route('index');
         }
 
-//        auth()->user()->current_day = $workDay;
         $previousDay = OfficeDay::whereDateBetween('start', (new Carbon)->startOfYear()->startOfDay()->toDateString(), (new Carbon)->yesterday()->endOfDay()->toDateString())
             ->where(['office_id' => $office->id])
             ->latest()
             ->first();
-//
-//        $previousDay = WorkDay::whereDateBetween('start', (new Carbon)->startOfYear()->startOfDay()->toDateString(), (new Carbon)->yesterday()->endOfDay()->toDateString())
-//            ->where(['office_day_id' => $previousOfficeDay->id])
-//            ->latest()
-//            ->first();
-//        dump($previousOfficeDay);
-//        dd($previousDay);
+
         return view('auth.step2', compact('workDay', 'previousDay'));
     }
 
@@ -174,5 +167,19 @@ class WorkDayController extends BaseController
             ])->latest()->first();
 
         return $workDay;
+    }
+
+    public function close()
+    {
+        $workDay = WorkDay::find(auth()->user()->work_day_id);
+        $user = User::find(auth()->user()->id);
+
+        if($workDay && $user){
+            $workDay->update(['finish' => Carbon::now()]);
+            $user->update(['work_day_id' => null]);
+        }
+
+        $data['work_day'] = $workDay;
+        return view('closed', compact('data'));
     }
 }

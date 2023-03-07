@@ -29,6 +29,11 @@ class WorkDay extends Model
         return $this->belongsTo(OfficeDay::class, 'office_day_id', 'id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
 
 
     public function deals()

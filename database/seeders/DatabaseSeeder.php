@@ -13,7 +13,9 @@ use App\Models\EncashmentType;
 use App\Models\Leftovers;
 use App\Models\Office;
 use App\Models\OfficeDay;
+use App\Models\RequestMoney;
 use App\Models\RequestMoneyStatus;
+use App\Models\Role;
 use App\Models\Source;
 use App\Models\User;
 use App\Models\WorkDay;
@@ -28,12 +30,36 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->createDefaultData();
+
+        Client::factory(10)->create();
+//        Office::factory(10)->create();
+        Collector::factory(5)->create();
+        Leftovers::factory(10)->create();
+        Commission::factory(15)->create();
+
+        User::create(['name' => 'Admin', 'email' => 'admin@conexus.com', 'password' => bcrypt('HgZuM9XjBBE7xkb'), 'role_id' => 1]);
+        User::create(['name' => 'Operator', 'email' => 'oper@conexus.com', 'password' => bcrypt('HgZuM9XjBBE7xkb'), 'role_id' => 2]);
+        User::create(['name' => 'Operator 2', 'email' => 'oper2@conexus.com', 'password' => bcrypt('HgZuM9XjBBE7xkb'), 'role_id' => 2]);
+
+        OfficeDay::factory(15)->create();
+        WorkDay::factory(30)->create();
+        Deal::factory(10)->create();
+        RequestMoney::factory(30)->create();
+
+        // \App\Models\User::factory(10)->create();
+    }
+
+    public function createDefaultData()
+    {
+
         $currencies = ['USD', 'KZT', 'USDT', 'GEL'];
         $sources = ['улица', 'inst', 'telegram', 'друг', 'таргет'];
         $dealTypes = ['Продажа', 'Покупка'];
-        $requestStatuses = ['Запрос отправлен', 'В процессе', 'Выполнен', 'Отклонён'];
+        $requestStatuses = ['Отправлен', 'В процессе', 'Выполнен', 'Отклонён'];
         $encashmentTypes = ['Приход', 'Расход'];
         $offices = ['Батуми', 'Тбилиси', 'Кабулети', 'Стамбул', 'Киев'];
+        $roles = ['admin', 'operator', 'develop'];
 
         foreach ($currencies as $currency) {
             Currency::firstOrCreate(
@@ -59,7 +85,6 @@ class DatabaseSeeder extends Seeder
                 ['title' => $encashmentType]
             );
         }
-
         foreach ($offices as $office) {
             Office::firstOrCreate(
                 ['name' => $office],
@@ -72,21 +97,11 @@ class DatabaseSeeder extends Seeder
                 ['title' => $status]
             );
         }
-
-        Client::factory(10)->create();
-//        Office::factory(10)->create();
-        Collector::factory(5)->create();
-        Leftovers::factory(10)->create();
-        Commission::factory(15)->create();
-
-        User::create(['name' => 'Admin', 'email' => 'admin@conexus.com', 'password' => bcrypt('HgZuM9XjBBE7xkb')]);
-        User::create(['name' => 'Operator', 'email' => 'oper@conexus.com', 'password' => bcrypt('HgZuM9XjBBE7xkb')]);
-        User::create(['name' => 'Operator 2', 'email' => 'oper2@conexus.com', 'password' => bcrypt('HgZuM9XjBBE7xkb')]);
-
-        OfficeDay::factory(5)->create();
-        WorkDay::factory(10)->create();
-        Deal::factory(10)->create();
-
-        // \App\Models\User::factory(10)->create();
+        foreach ($roles as $role) {
+            Role::firstOrCreate(
+                ['title' => $role],
+                ['title' => $role]
+            );
+        }
     }
 }
