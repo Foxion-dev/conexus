@@ -16,6 +16,11 @@ class Deal extends Model
     protected $table = 'deals'; // хорошая практика ставить явно имя таблицы
     protected $guarded = []; // разрешаем добавлять в бд записи(список запрещённых)
 
+    public function scopeWhereDateBetween($query,$fieldName,$fromDate,$toDate)
+    {
+        return $query->whereDate($fieldName,'>=',$fromDate)->whereDate($fieldName,'<=',$toDate);
+    }
+
     public function client()
     {
         return $this->belongsTo(Client::class, 'client_id', 'id'); // находит по связи "один"

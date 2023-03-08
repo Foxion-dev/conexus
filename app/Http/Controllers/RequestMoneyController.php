@@ -26,8 +26,17 @@ class RequestMoneyController extends BaseController
     {
         $this->setProperties();
 
-        $requests['inside'] = RequestMoney::latest()->where(['request_office_id' => $this->currentOffice->id])->get();
+        $requestsInside = RequestMoney::latest()->where(['request_office_id' => $this->currentOffice->id])->get();
+//        $requests['inside'] = RequestMoney::latest()->where(['request_office_id' => $this->currentOffice->id])->get();
         $requests['outside'] = RequestMoney::latest()->where(['start_office_id' => $this->currentOffice->id])->get();
+
+        foreach ($requestsInside as $item) {
+            if($item->status_id == 1 || $item->status_id == 2){
+                $requests['inside']['actual'][] = $item;
+            }else{
+                $requests['inside']['finish'][] = $item;
+            }
+        }
 
         return view('requestMoney.index', compact('requests'));
     }
@@ -115,6 +124,45 @@ class RequestMoneyController extends BaseController
         $requestMoney = RequestMoney::withTrashed()->find(2);
         $requestMoney->restore();
 
+    }
+
+    public function see($id)
+    {
+        $requestMoney = RequestMoney::find($id);
+        $requestMoney->update(['status_id' => 2]);
+
+        return redirect()->back()->with(['status' => 'success', 'message' => 'Запрос принят в работу!']);
+    }
+
+    public function success($id)
+    {
+        $this->setProperties();
+        $requestMoney = RequestMoney::find($id);
+
+        $requestOfficeDay = $requestMoney->workDay->officeDay;
+        $requestLeftovers = $requestOfficeDay->leftovers;
+        $currentLeftovers = $this->currentWorkDay->officeDay->leftovers;
+        $currency = $requestMoney->currency->title;
+        $amount = $requestMoney->amount;
+
+        if($currentLeftovers->$currency > $amount){
+
+            $currentLeftovers->update([$currency => $currentLeftovers->$currency - $amount]);
+            $requestLeftovers->update([$currency => $requestLeftovers->$currency + $amount]);
+            $requestMoney->update(['status_id' => 3]);
+        }else{
+            return redirect()->back()->with(['status' => 'error', 'message' => 'Недостаточно средств для выполнения запроса!']);
+        }
+
+        return redirect()->back()->with(['status' => 'success', 'message' => 'Запрос удовлетворён!']);
+    }
+
+    public function decline($id)
+    {
+        $requestMoney = RequestMoney::find($id);
+        $requestMoney->update(['status_id' => 4]);
+
+        return redirect()->back()->with(['status' => 'success', 'message' => 'Запрос отвергнут!']);
     }
 
 }

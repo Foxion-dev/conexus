@@ -74,7 +74,9 @@ Route::patch('commissions/edit', [App\Http\Controllers\CommissionController::cla
 Route::get('/requests', [App\Http\Controllers\RequestMoneyController::class, 'index'])->name('requestMoney.index');
 Route::get('/requests/create', [App\Http\Controllers\RequestMoneyController::class, 'create'])->name('requestMoney.create');
 Route::post('requests', [App\Http\Controllers\RequestMoneyController::class, 'store'])->name('requestMoney.store');
-//Route::get('requests/{request}', [App\Http\Controllers\RequestController::class, 'show'])->name('request.show');
+Route::post('requests/{request}/see', [App\Http\Controllers\RequestMoneyController::class, 'see'])->name('request.see');
+Route::post('requests/{request}/decline', [App\Http\Controllers\RequestMoneyController::class, 'decline'])->name('request.decline');
+Route::post('requests/{request}/success', [App\Http\Controllers\RequestMoneyController::class, 'success'])->name('request.success');
 //Route::get('requests/{request}/edit', [App\Http\Controllers\RequestController::class, 'edit'])->name('request.edit');
 //Route::patch('requests/{request}', [App\Http\Controllers\RequestController::class, 'update'])->name('request.update');
 Route::delete('requests/{request}', [App\Http\Controllers\RequestMoneyController::class, 'destroy'])->name('requestMoney.destroy');
@@ -82,7 +84,11 @@ Route::delete('requests/{request}', [App\Http\Controllers\RequestMoneyController
 Route::get('/offices/create', [App\Http\Controllers\OfficeController::class, 'create'])->name('office.create');
 Route::post('offices', [App\Http\Controllers\OfficeController::class, 'store'])->name('office.store');
 
+Route::get('/statistic', [App\Http\Controllers\StatisticController::class, 'index'])->name('statistic.index');
+Route::post('/statistic', [App\Http\Controllers\StatisticController::class, 'filter'])->name('statistic.filter');
 
+
+Route::get('/rates', [App\Http\Controllers\ExchangeRatesController::class, 'index'])->name('rates.index');
 
 // requests
 Route::post('/client-search', function (Request $request) {

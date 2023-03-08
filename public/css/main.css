@@ -357,6 +357,9 @@ i {
   max-width: 25px;
   height: 25px;
 }
+.form-input input[type=date] {
+  color: #1a202c;
+}
 .form-input input[type=file] {
   background: transparent;
   padding-left: 0;
@@ -378,6 +381,10 @@ i {
   max-width: 100%;
   width: 100%;
   height: 45px;
+  cursor: pointer;
+}
+.form-input select[multiple] {
+  height: 150px;
 }
 .form-input select.is-invalid {
   border: 2px solid red;
@@ -465,6 +472,19 @@ i {
 .operations__title {
   margin-bottom: 15px;
 }
+.operations__message {
+  max-width: 100%;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 2px solid #fff;
+  border-radius: 5px;
+}
+.operations__message--error {
+  border: 2px solid #8a2121;
+  color: #8a2121;
+}
 .operations__grid-titles, .operations__grid-row {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
@@ -478,13 +498,13 @@ i {
   align-items: center;
 }
 .operations__grid-titles div.green, .operations__grid-row div.green {
-  background-color: green;
+  background-color: #0b5c0b;
 }
 .operations__grid-titles div.red, .operations__grid-row div.red {
-  background-color: red;
+  background-color: #8a2121;
 }
 .operations__grid-titles div.blue, .operations__grid-row div.blue {
-  background-color: cadetblue;
+  background-color: #0f0f8f;
 }
 .operations__grid-titles {
   padding-bottom: 15px;
@@ -515,9 +535,35 @@ i {
 .operations--offices .operations__grid-titles, .operations--offices .operations__grid-row {
   grid-template-columns: repeat(2, 1fr);
 }
+.operations--stats {
+  margin-top: 30px;
+}
+.operations--stats .operations__grid-titles, .operations--stats .operations__grid-row {
+  grid-template-columns: repeat(5, 1fr);
+}
+.operations--stats .operations__grid-row {
+  padding-bottom: 30px;
+  border-bottom: 2px solid #fff;
+}
 
 .actions i {
   margin: 0;
+}
+.actions__item--btn {
+  border: 1px solid #fff;
+  padding: 5px 10px;
+  border-radius: 3px;
+  height: 40px;
+  width: 40px;
+}
+.actions__item--btn.green {
+  background-color: #0b5c0b;
+}
+.actions__item--btn.red {
+  background-color: #8a2121;
+}
+.actions__item--btn.blue {
+  background-color: #0f0f8f;
 }
 
 .menu-block__title {

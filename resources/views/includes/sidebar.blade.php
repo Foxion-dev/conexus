@@ -12,6 +12,7 @@
             <li><i class="fa-solid fa-repeat"></i><a href="{{ route('commissions.edit') }}">Обновить комиссию</a></li>
             <li><i class="fa-solid fa-person-circle-plus"></i><a href="{{ route('client.create') }}">Добавить клиента</a></li>
             <li><i class="fa-solid fa-flag"></i><a href="{{ route('source.create') }}">Добавить источник</a></li>
+            <li><i class="fa-solid fa-flag"></i><a href="{{ route('rates.index') }}">Курсы валют</a></li>
 {{--            <li><i class="fa-solid fa-users-gear"></i><a href="{{ route('register') }}">Добавить оператора</a></li>--}}
         </ul>
     </div>
@@ -26,7 +27,7 @@
             <li><i class="fa-solid fa-person-circle-plus"></i><a href="{{ route('collector.create') }}">Добавить инкассатора</a></li>
             <li><i class="fa-solid fa-house-laptop"></i><a href="{{ route('office.create') }}">Добавить офис</a></li>
             <li><i class="fa-solid fa-clock-rotate-left"></i><a href="{{ route('history') }}">История</a></li>
-            <li><i class="fa-solid fa-square-poll-vertical"></i><a href="">Статистика</a></li>
+            <li><i class="fa-solid fa-square-poll-vertical"></i><a href="{{ route('statistic.index') }}">Статистика</a></li>
             <li><i class="fa-solid fa-people-group"></i><a href="{{ route('client.index') }}">Список клиентов</a></li>
             <li><i class="fa-solid fa-gear"></i><a href="">Настройки</a></li>
             <li><i class="fa-solid fa-right-from-bracket"></i>
