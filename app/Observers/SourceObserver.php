@@ -16,13 +16,13 @@ class SourceObserver
     public function created(Source $source)
     {
         $message = 'Пользователь ';
-        Logger::create([
-            'user_id' => auth()->user()->id,
-            'action' => 'add',
-            'model_name' => 'Source',
-            'element_id' => $source->id,
-            'message' => $message
-        ]);
+//        Logger::create([
+//            'user_id' => auth()->user()->id,
+//            'action' => 'add',
+//            'model_name' => 'Source',
+//            'element_id' => $source->id,
+//            'message' => $message
+//        ]);
 
     }
     /**
