@@ -72,8 +72,10 @@
                         <h5>Интервал</h5>
                         <h5>Количество сделок</h5>
                         <h5>Общий профит</h5>
-                        <h5>Оборот по сделкам (приход)</h5>
-                        <h5>Оборот по сделкам (расход)</h5>
+                        <h5>Оборот по сделкам $</h5>
+                        <h5>Оборот по сделкам USDT</h5>
+{{--                        <h5>Оборот по сделкам (приход)</h5>--}}
+{{--                        <h5>Оборот по сделкам (расход)</h5>--}}
                     </div>
 
                     @foreach($statistic['items'] as $item)
@@ -87,8 +89,8 @@
 {{--                            <div>{{  $statistic['data']['finish'] }}</div>--}}
                             <div>{{  $item['count_deals'] }}</div>
                             <div>{{  $item['profit'] }}</div>
-                            <div>{{  $item['turnover_in'] }}</div>
-                            <div>{{  $item['turnover_out'] }}</div>
+                            <div>{{  $item['turnover_dollar'] }}</div>
+                            <div>{{  $item['turnover_usdt'] }}</div>
                         </div>
                     @endforeach
 

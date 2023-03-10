@@ -11,6 +11,6 @@ class ExchangeRatesController extends BaseController
     {
         $exchangeRates = new ExchangeRate();
 
-        dd($exchangeRates->exchangeRate('GBP', ['EUR', 'USD']));
+        dd($exchangeRates->exchangeRate('USD', ['GEL', 'KZT', 'RUB']));
     }
 }

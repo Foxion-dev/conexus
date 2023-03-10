@@ -22,6 +22,8 @@ Route::post('/step2', [App\Http\Controllers\WorkDayController::class, 'officeSet
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [App\Http\Controllers\IndexController::class, 'index'])->name('index');
+Route::post('/warning-message', [App\Http\Controllers\OfficeDayController::class, 'warning'])->name('warning.message');
+
 Route::get('/history', [App\Http\Controllers\HistoryController::class, 'index'])->name('history');
 
 
@@ -97,7 +99,7 @@ Route::post('/client-search', function (Request $request) {
 
 Route::get('/close-work-day', [App\Http\Controllers\WorkDayController::class, 'close'])->name('day.close');
 Route::get('/close-office-day', [App\Http\Controllers\OfficeDayController::class, 'close'])->name('office.close');
-Route::get('/warning-message', [App\Http\Controllers\OfficeDayController::class, 'warning'])->name('warning.message');
+
 
 
 

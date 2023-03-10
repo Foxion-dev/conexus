@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Components\WarningMessage;
 use App\Models\Currency;
 use App\Models\Deal;
 use App\Models\Encashment;
@@ -127,5 +128,32 @@ class OfficeDayController extends BaseController
         Auth::setUser($currentUser);
         $data['work_day'] = $workDay;
         return view('closed', compact('data'));
+    }
+
+    public function warning()
+    {
+        $workDay = WorkDay::find(auth()->user()->work_day_id);
+        $data = request()->validate([
+            'usd_fact' => 'required|integer',
+            'usd_system' => 'required|integer',
+            'usdt_fact' => 'required|integer',
+            'usdt_system' => 'required|integer',
+            'gel_fact' => 'required|integer',
+            'gel_system' => 'required|integer',
+            'kzt_fact' => 'required|integer',
+            'kzt_system' => 'required|integer',
+            'comment' => '',
+        ]);
+
+
+        $request = new WarningMessage();
+        $request->setMessage($workDay, $data);
+        $status = $request->sendMessage();
+
+        if($status === 200){
+            return redirect()->back()->with(['status' => 'success', 'message' => 'Сообщение о несоответствии отправлено!']);
+        }else{
+            return redirect()->back()->with(['status' => 'error', 'message' => 'Ошибка отправки сообщения! Обратитесь к администратору!']);
+        }
     }
 }

@@ -369,6 +369,24 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         },
     }
+
+    const warningForm = {
+        button: document.querySelector('.js-open-warning-form'),
+        form: document.querySelector('.dashboard__warning-form'),
+        init(){
+            if(this.button !== null && this.form !== null){
+
+                const changeFormOpen = this.openForm.bind(this);
+
+                this.button.addEventListener('click', changeFormOpen)
+            }
+        },
+        openForm(){
+            if(!this.form.classList.contains('show')){
+                this.form.classList.add('show')
+            }
+        },
+    }
     /*
     * Кастомный селект
     * */
@@ -419,6 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     calculator.init();
+    warningForm.init();
     clientSearch.init();
     requestMoney.init();
 

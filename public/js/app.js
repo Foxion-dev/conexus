@@ -2441,6 +2441,21 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   };
+  var warningForm = {
+    button: document.querySelector('.js-open-warning-form'),
+    form: document.querySelector('.dashboard__warning-form'),
+    init: function init() {
+      if (this.button !== null && this.form !== null) {
+        var changeFormOpen = this.openForm.bind(this);
+        this.button.addEventListener('click', changeFormOpen);
+      }
+    },
+    openForm: function openForm() {
+      if (!this.form.classList.contains('show')) {
+        this.form.classList.add('show');
+      }
+    }
+  };
   /*
   * Кастомный селект
   * */
@@ -2490,6 +2505,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
   calculator.init();
+  warningForm.init();
   clientSearch.init();
   requestMoney.init();
 });

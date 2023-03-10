@@ -2,6 +2,9 @@
 @section('content')
     <div class="dashboard">
         <h1 class="dashboard__title page-title">Добро пожаловать, {{ auth()->user()->name }}</h1>
+        @if(session('message'))
+            <h3 class="dashboard__message session-message {{ session('status') == 'error' ? ' session-message--error ' : ' ' }}">{{ session('message') }}</h3>
+        @endif
 
         <div class="dashboard__balances-box balance-box">
 
@@ -129,8 +132,128 @@
 {{--                <a href="" class="btn btn-default"><i class="fa-solid fa-arrow-right-arrow-left"></i>Обмен валюты</a>--}}
 {{--            </div>--}}
             <div class="dashboard__buttons-row">
-                <a href="{{ route('warning.message') }}" class="btn btn-red"><i class="fa-solid fa-triangle-exclamation"></i> Обнаружено несоответствие</a>
+                <button class="btn btn-red js-open-warning-form"><i class="fa-solid fa-triangle-exclamation"></i> Обнаружено несоответствие</button>
             </div>
         </div>
+
+        <form action="{{ route('warning.message') }}" method="post" enctype="multipart/form-data" class="dashboard__warning-form form-default">
+            @csrf
+            <div class="form-default__title section-title">Данные несоответствия</div>
+            <div class="form-default__title section-title">USD</div>
+            <div class="flex-body">
+                <div class="form-input">
+                    <label for="usd_fact">Факт</label>
+                    <input type="text" class="@error('usd_fact') is-invalid @enderror" name="usd_fact" placeholder="Факт" value="">
+
+                    @error('usd_fact')
+                    <span class="form-input__error" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                </div>
+                <div class="form-input">
+                    <label for="usd_system">В системе</label>
+                    <input type="text" class="@error('usd_system') is-invalid @enderror disabled" name="usd_system" placeholder="В системе" value="{{ $data['work_day']->officeDay->leftovers->USD ?? 0 }}">
+
+                    @error('usd_system')
+                    <span class="form-input__error" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                </div>
+            </div>
+            <div class="form-default__title section-title">USDT</div>
+            <div class="flex-body">
+                <div class="form-input">
+                    <label for="usdt_fact">Факт</label>
+                    <input type="text" class="@error('usdt_fact') is-invalid @enderror" name="usdt_fact" placeholder="Факт" value="">
+
+                    @error('usdt_fact')
+                    <span class="form-input__error" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                </div>
+                <div class="form-input">
+                    <label for="usdt_system">В системе</label>
+                    <input type="text" class="@error('usdt_system') is-invalid @enderror disabled" name="usdt_system" placeholder="В системе" value="{{ $data['work_day']->officeDay->leftovers->USDT ?? 0 }}">
+
+                    @error('usdt_system')
+                    <span class="form-input__error" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                </div>
+            </div>
+            <div class="form-default__title section-title">GEL</div>
+            <div class="flex-body">
+                <div class="form-input">
+                    <label for="gel_fact">Факт</label>
+                    <input type="text" class="@error('gel_fact') is-invalid @enderror" name="gel_fact" placeholder="Факт" value="">
+
+                    @error('gel_fact')
+                    <span class="form-input__error" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                </div>
+                <div class="form-input">
+                    <label for="gel_system">В системе</label>
+                    <input type="text" class="@error('gel_system') is-invalid @enderror disabled" name="gel_system" placeholder="В системе" value="{{ $data['work_day']->officeDay->leftovers->GEL ?? 0 }}">
+
+                    @error('gel_system')
+                    <span class="form-input__error" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                </div>
+            </div>
+            <div class="form-default__title section-title">KZT</div>
+            <div class="flex-body">
+                <div class="form-input">
+                    <label for="kzt_fact">Факт</label>
+                    <input type="text" class="@error('kzt_fact') is-invalid @enderror" name="kzt_fact" placeholder="Факт" value="">
+
+                    @error('kzt_fact')
+                    <span class="form-input__error" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                </div>
+                <div class="form-input">
+                    <label for="kzt_system">В системе</label>
+                    <input type="text" class="@error('kzt_system') is-invalid @enderror disabled" name="kzt_system" placeholder="В системе" value="{{ $data['work_day']->officeDay->leftovers->KZT ?? 0 }}">
+
+                    @error('kzt_system')
+                    <span class="form-input__error" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+
+                </div>
+            </div>
+
+            <div class="form-input">
+                <label for="comment">Комментарий</label>
+                <textarea type="text" class="@error('comment') is-invalid @enderror" name="comment">{{ old("comment") }}</textarea>
+
+                @error('comment')
+                <span class="form-input__error" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+
+            </div>
+            <div class="form-input">
+                <button type="submit" class="btn">Отправить</button>
+            </div>
+        </form>
     </div>
 @endsection

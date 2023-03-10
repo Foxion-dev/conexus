@@ -5,7 +5,7 @@
             <div class="operations operations--requests">
                 <h3 class="operations__title section-title">Входящие</h3>
                 @if(session('message'))
-                    <h3 class="operations__message {{ session('status') == 'error' ? ' operations__message--error ' : ' ' }}">{{ session('message') }}</h3>
+                    <h3 class="operations__message session-message {{ session('status') == 'error' ? ' session-message--error ' : ' ' }}">{{ session('message') }}</h3>
                 @endif
                 <div class="operations__grid">
                     <div class="operations__grid-titles">
