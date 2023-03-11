@@ -12,8 +12,11 @@ class Log
 
     public function __construct($user, $action, $model, $elementId, $data = [])
     {
-        $this->message = $this->constructMessage($user, $action, $model, $elementId);
-        $this->log = $this->createLog($user, $action, $model, $elementId, $this->message, $data);
+        if(is_object($user) && $user->id){
+            $this->message = $this->constructMessage($user, $action, $model, $elementId);
+            $this->log = $this->createLog($user, $action, $model, $elementId, $this->message, $data);
+
+        }
     }
 
     public function createLog($user, $action, $model, $elementId, $message, $data)
