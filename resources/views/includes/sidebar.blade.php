@@ -1,7 +1,16 @@
 <aside>
     <div class="logo">
-        <img src="/images/logo.png" alt="logo">
+        <a href="{{ route('index') }}">
+            <img src="/images/logo.png" alt="logo">
+
+        </a>
+        <div class="hamburger-lines">
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+            <span class="line line3"></span>
+        </div>
     </div>
+
     <div class="menu-block">
 
         <ul>
@@ -12,7 +21,7 @@
             <li><i class="fa-solid fa-repeat"></i><a href="{{ route('commissions.edit') }}">Обновить комиссию</a></li>
             <li><i class="fa-solid fa-person-circle-plus"></i><a href="{{ route('client.create') }}">Добавить клиента</a></li>
             <li><i class="fa-solid fa-flag"></i><a href="{{ route('source.create') }}">Добавить источник</a></li>
-            <li><i class="fa-solid fa-flag"></i><a href="{{ route('rates.index') }}">Курсы валют</a></li>
+{{--            <li><i class="fa-solid fa-arrow-right-arrow-left"></i><a href="{{ route('rates.index') }}">Курсы валют</a></li>--}}
 {{--            <li><i class="fa-solid fa-users-gear"></i><a href="{{ route('register') }}">Добавить оператора</a></li>--}}
         </ul>
     </div>
@@ -26,7 +35,7 @@
 {{--            <li><i class="fa-solid fa-users-gear"></i><a href="{{ route('register') }}">Добавить оператора</a></li>--}}
             <li><i class="fa-solid fa-person-circle-plus"></i><a href="{{ route('collector.create') }}">Добавить инкассатора</a></li>
             <li><i class="fa-solid fa-house-laptop"></i><a href="{{ route('office.create') }}">Добавить офис</a></li>
-            <li><i class="fa-solid fa-clock-rotate-left"></i><a href="{{ route('history') }}">История</a></li>
+{{--            <li><i class="fa-solid fa-clock-rotate-left"></i><a href="{{ route('history') }}">История</a></li>--}}
             <li><i class="fa-solid fa-square-poll-vertical"></i><a href="{{ route('statistic.index') }}">Статистика</a></li>
             <li><i class="fa-solid fa-people-group"></i><a href="{{ route('client.index') }}">Список клиентов</a></li>
             <li><i class="fa-solid fa-gear"></i><a href="">Настройки</a></li>

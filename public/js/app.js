@@ -2504,6 +2504,28 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   };
+  var mobileSidebar = {
+    burger: document.querySelector('.hamburger-lines'),
+    sidebar: document.querySelector('aside'),
+    init: function init() {
+      if (this.burger !== null && this.sidebar !== null) {
+        var changeSidebarOpen = this.openSidebar.bind(this);
+        this.burger.addEventListener('click', changeSidebarOpen);
+      }
+    },
+    openSidebar: function openSidebar(event) {
+      var target = event.target;
+      if (!target.classList.contains('hamburger-lines')) target = target.closest('.hamburger-lines');
+      target.classList.toggle('open');
+      this.sidebar.classList.toggle('mobile-show');
+      if (target.classList.contains('open')) {
+        document.querySelector('body').style.overflow = 'hidden';
+      } else {
+        document.querySelector('body').style.overflow = 'unset';
+      }
+    }
+  };
+  mobileSidebar.init();
   calculator.init();
   warningForm.init();
   clientSearch.init();

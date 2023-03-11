@@ -14,7 +14,7 @@
         <div>{{  $expense->amount }}</div>
         <div>{{  $expense->currency->title  }}</div>
         <div>{{  $expense->comment  }}</div>
-        <div class="operations__item-actions actions flex-body">
+        <div class="operations__item-actions actions flex-body flex-no-wrap">
             <a href="{{ route('expense.show', $expense->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-eye"></i></a>
             <a href="{{ route('expense.edit', $expense->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-pen-to-square"></i></a>
             <form action="{{ route('expense.destroy', $expense->id) }}" method="post">

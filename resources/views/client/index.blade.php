@@ -23,7 +23,7 @@
                         <div><img class="mini-img" src="{{ asset('/storage/'.$client->person_documents ) }}" alt=""></div>
                         <div>{{  $client->source->title ?? '' }}</div>
 
-                        <div class="operations__item-actions actions flex-body">
+                        <div class="operations__item-actions actions flex-body flex-no-wrap">
                             <a href="{{ route('client.show', $client->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-eye"></i></a>
                             <a href="{{ route('client.edit', $client->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-pen-to-square"></i></a>
                             <form action="{{ route('client.destroy', $client->id) }}" method="post">

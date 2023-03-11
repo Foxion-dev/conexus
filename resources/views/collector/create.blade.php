@@ -13,7 +13,7 @@
                     <div class="operations__grid-row">
                         <div>{{  date('d.m.Y H:i', strtotime($collector->created_at))}}</div>
                         <div>{{  $collector->name }}</div>
-                        <div class="operations__item-actions actions flex-body">
+                        <div class="operations__item-actions actions flex-body flex-no-wrap">
                             <form action="{{ route('collector.destroy', $collector->id) }}" method="post">
                                 @csrf
                                 @method('delete')

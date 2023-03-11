@@ -60,7 +60,6 @@ Route::patch('clients/{client}', [App\Http\Controllers\ClientController::class, 
 Route::delete('clients/{client}', [App\Http\Controllers\ClientController::class, 'destroy'])->name('client.destroy');
 
 
-
 Route::get('/sources/create', [App\Http\Controllers\SourceController::class, 'create'])->name('source.create');
 Route::post('sources', [App\Http\Controllers\SourceController::class, 'store'])->name('source.store');
 Route::delete('sources/{source}', [App\Http\Controllers\SourceController::class, 'destroy'])->name('source.destroy');

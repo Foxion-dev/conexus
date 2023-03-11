@@ -13,7 +13,7 @@
                     <div class="operations__grid-row">
                         <div>{{  date('d.m.Y H:i', strtotime($source->created_at))}}</div>
                         <div>{{  $source->title }}</div>
-                        <div class="operations__item-actions actions flex-body">
+                        <div class="operations__item-actions actions flex-body flex-no-wrap">
                             <form action="{{ route('source.destroy', $source->id) }}" method="post">
                                 @csrf
                                 @method('delete')

@@ -436,6 +436,37 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    const mobileSidebar =  {
+        burger: document.querySelector('.hamburger-lines'),
+        sidebar: document.querySelector('aside'),
+        init(){
+            if(this.burger !== null && this.sidebar !== null){
+
+                const changeSidebarOpen = this.openSidebar.bind(this);
+
+                this.burger.addEventListener('click', changeSidebarOpen)
+            }
+        },
+        openSidebar(event){
+
+            let {target} = event
+            if(!target.classList.contains('hamburger-lines')) target = target.closest('.hamburger-lines')
+
+
+            target.classList.toggle('open')
+            this.sidebar.classList.toggle('mobile-show')
+
+            if(target.classList.contains('open')){
+                document.querySelector('body').style.overflow = 'hidden'
+            }else{
+                document.querySelector('body').style.overflow = 'unset'
+
+            }
+
+        },
+    }
+
+    mobileSidebar.init();
     calculator.init();
     warningForm.init();
     clientSearch.init();

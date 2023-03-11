@@ -12,8 +12,10 @@
         height: 1px;
         width: calc(100% + 20px);
         position: relative;
-        /*right: -0px;*/
-        background: #c0c0c0;
+        background: $whiteGray;
+        @media screen and ( max-width: $mediaMedium){
+            width: 100%;
+        }
     }
     ul {
         li {

@@ -40,7 +40,7 @@ class ClientController extends BaseController
 
         $client = Client::create($data);
 
-        return redirect()->route('index');
+        return redirect()->back();
     }
 
     public function show(Client $client)
@@ -84,7 +84,7 @@ class ClientController extends BaseController
 
         $client->delete();
 
-        return redirect()->route('index');
+        return redirect()->back();
     }
 
     public function destroy(Client $client)
@@ -92,7 +92,7 @@ class ClientController extends BaseController
 
         $client->delete();
 
-        return redirect()->route('index');
+        return redirect()->back();
     }
 
     public function restore()

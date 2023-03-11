@@ -16,7 +16,7 @@
                     <div>{{  $encashment->amount }}</div>
                     <div>{{  $encashment->currency->title  }}</div>
                     <div>{{  $encashment->collector->name  }}</div>
-                    <div class="operations__item-actions actions flex-body">
+                    <div class="operations__item-actions actions flex-body flex-no-wrap">
                         <a href="{{ route('encashment.show', $encashment->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-eye"></i></a>
                         <a href="{{ route('encashment.edit', $encashment->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-pen-to-square"></i></a>
                         <form action="{{ route('encashment.destroy', $encashment->id) }}" method="post">

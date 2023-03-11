@@ -6,7 +6,7 @@
             <h3 class="dashboard__message session-message {{ session('status') == 'error' ? ' session-message--error ' : ' ' }}">{{ session('message') }}</h3>
         @endif
 
-        <div class="dashboard__balances-box balance-box">
+        <div class="dashboard__balances-box balance-box flex-body">
 
             <div class="balance-box__item">
                 <div class="balance-box__item-title">Остаток USD ($)</div>
@@ -42,8 +42,8 @@
                             <div>{{  $deal->commission  }}</div>
                             <div>{{  $deal->commission_sum  }}</div>
                             <div>{{  $deal->return_sum }}</div>
-                            <div>{{  $deal->client->name }}</div>
-                            <div class="operations__item-actions actions flex-body">
+                            <div>{{  $deal->client->contact }}</div>
+                            <div class="operations__item-actions actions flex-body flex-no-wrap">
                                 <a href="{{ route('deal.show', $deal->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-eye"></i></a>
                                 <a href="{{ route('deal.edit', $deal->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-pen-to-square"></i></a>
                                 <form action="{{ route('deal.destroy', $deal->id) }}" method="post">
@@ -74,7 +74,7 @@
                             <div>{{  $expense->amount }}</div>
                             <div>{{  $expense->currency->title  }}</div>
                             <div>{{  $expense->comment  }}</div>
-                            <div class="operations__item-actions actions flex-body">
+                            <div class="operations__item-actions actions flex-body flex-no-wrap">
                                 <a href="{{ route('expense.show', $expense->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-eye"></i></a>
                                 <a href="{{ route('expense.edit', $expense->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-pen-to-square"></i></a>
                                 <form action="{{ route('expense.destroy', $expense->id) }}" method="post">
@@ -108,7 +108,7 @@
                             <div>{{  $encashment->amount }}</div>
                             <div>{{  $encashment->currency->title  }}</div>
                             <div>{{  $encashment->collector->name  }}</div>
-                            <div class="operations__item-actions actions flex-body">
+                            <div class="operations__item-actions actions flex-body flex-no-wrap">
                                 <a href="{{ route('encashment.show', $encashment->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-eye"></i></a>
                                 <a href="{{ route('encashment.edit', $encashment->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-pen-to-square"></i></a>
                                 <form action="{{ route('encashment.destroy', $encashment->id) }}" method="post">

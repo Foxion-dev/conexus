@@ -8,7 +8,7 @@
             @csrf
             <input type="hidden" name="office_id" value="{{ $workDay->officeDay->office_id }}">
             <input type="hidden" name="work_day_id" value="{{ $workDay->id }}">
-            <h2 class="default-form__title">Введите остатки:</h2>
+            <h2 class="default-form__title section-title">Введите остатки:</h2>
             <div class="default-form__row flex-body ">
                 <div class="form-input">
                     <label for="USD">USD</label>
@@ -51,7 +51,7 @@
                     @enderror
                 </div>
             </div>
-            <h2 class="default-form__title">Введите комиссии:</h2>
+            <h2 class="default-form__title section-title">Введите комиссии:</h2>
             <div class="default-form__row flex-body">
                 <div class="default-form__col">
                     <h3 class="default-form__subtitle">Покупка</h3>

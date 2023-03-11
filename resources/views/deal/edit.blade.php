@@ -48,7 +48,7 @@
         </div>
 
         <div class="form-input form-input--checkbox">
-            <label for="commission_on" class="flex-body ">
+            <label for="commission_on" class="flex-body flex-no-wrap">
                 <input name="commission_on" type="checkbox" {{ $deal->commission_on == 1 ? 'checked' : '' }}  value="true">
                 <span>Учитывать комиссию</span>
             </label>
@@ -105,7 +105,7 @@
 
                 <div class="deal-calculator__row flex-body">
                     <div class="form-input form-input--checkbox">
-                        <label for="edit_commission" class="flex-body">
+                        <label for="edit_commission" class="flex-body flex-no-wrap">
                             <input name="edit_commission" type="checkbox" {{ $deal->custom_commission == 1 ? 'checked' : '' }} value="true">
                             <span>Настроить комиссию вручную</span>
                         </label>

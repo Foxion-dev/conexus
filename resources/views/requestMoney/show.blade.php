@@ -19,7 +19,7 @@
                     <div>{{  $client->comment }}</div>
                     <div><img src="{{ asset('/storage/'.$client->person_photo ) }}" alt=""></div>
                     <div><img src="{{ asset('/storage/'.$client->person_documents ) }}" alt=""></div>
-                    <div class="operations__item-actions actions flex-body">
+                    <div class="operations__item-actions actions flex-body flex-no-wrap">
                         <a href="{{ route('client.edit', $client->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-pen-to-square"></i></a>
                         <form action="{{ route('client.destroy', $client->id) }}" method="post">
                             @csrf

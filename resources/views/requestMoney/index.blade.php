@@ -32,7 +32,7 @@
                                 <div>{{  $request->collector->name ?? '---' }}</div>
                                 @switch($request->status->id)
                                     @case(1)
-                                        <div class="flex-body actions">
+                                        <div class="flex-body actions flex-no-wrap">
                                             <form action="{{ route('request.see', $request->id) }}" method="post">
                                                 @csrf
                                                 <button type="submit" class="actions__item actions__item--btn blue"><i class="fa-regular fa-eye"></i></button>
@@ -45,7 +45,7 @@
 
                                     @break
                                     @case(2)
-                                        <div class="flex-body actions">
+                                        <div class="flex-body actions flex-no-wrap">
                                             <form action="{{ route('request.success', $request->id) }}" method="post">
                                                 @csrf
                                                 <button type="submit" class="actions__item actions__item--btn green"><i class="fa-solid fa-check-double"></i></button>
@@ -67,7 +67,7 @@
                                     @break
                                 @endswitch
 
-                                <div class="operations__item-actions actions flex-body">
+                                <div class="operations__item-actions actions flex-body flex-no-wrap">
         {{--                            <a href="{{ route('requestMoney.show', $request->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-eye"></i></a>--}}
         {{--                            <a href="{{ route('requestMoney.edit', $request->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-pen-to-square"></i></a>--}}
                                     <form action="{{ route('requestMoney.destroy', $request->id) }}" method="post">
@@ -92,7 +92,7 @@
                                 <div>{{  $request->collector->name ?? '---' }}</div>
                                 @switch($request->status->id)
                                     @case(1)
-                                    <div class="flex-body actions">
+                                    <div class="flex-body actions flex-no-wrap">
                                         <form action="{{ route('request.see', $request->id) }}" method="post">
                                             @csrf
                                             <button type="submit" class="actions__item actions__item--btn blue"><i class="fa-regular fa-eye"></i></button>
@@ -105,7 +105,7 @@
 
                                     @break
                                     @case(2)
-                                    <div class="flex-body actions">
+                                    <div class="flex-body actions flex-no-wrap">
                                         <form action="{{ route('request.success', $request->id) }}" method="post">
                                             @csrf
                                             <button type="submit" class="actions__item actions__item--btn green"><i class="fa-solid fa-check-double"></i></button>
@@ -127,7 +127,7 @@
                                     @break
                                 @endswitch
 
-                                <div class="operations__item-actions actions flex-body">
+                                <div class="operations__item-actions actions flex-body flex-no-wrap">
                                     {{--                            <a href="{{ route('requestMoney.show', $request->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-eye"></i></a>--}}
                                     {{--                            <a href="{{ route('requestMoney.edit', $request->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-pen-to-square"></i></a>--}}
                                     <form action="{{ route('requestMoney.destroy', $request->id) }}" method="post">
@@ -184,7 +184,7 @@
                                 @break
                             @endswitch
 
-                            <div class="operations__item-actions actions flex-body">
+                            <div class="operations__item-actions actions flex-body flex-no-wrap">
                                 <form action="{{ route('requestMoney.destroy', $request->id) }}" method="post">
                                     @csrf
                                     @method('delete')

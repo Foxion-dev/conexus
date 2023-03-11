@@ -19,7 +19,8 @@ class CreateLoggersTable extends Migration
             $table->string('action');
             $table->string('model_name');
             $table->unsignedBigInteger('element_id');
-            $table->text('message');
+            $table->text('message')->nullable();
+            $table->text('data')->nullable();
             $table->timestamps();
 
             $table->softDeletes();

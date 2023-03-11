@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Components\Log;
 use App\Models\Logger;
 use App\Models\Source;
 
@@ -15,35 +16,7 @@ class SourceObserver
      */
     public function created(Source $source)
     {
-        $message = 'Пользователь ';
-//        Logger::create([
-//            'user_id' => auth()->user()->id,
-//            'action' => 'add',
-//            'model_name' => 'Source',
-//            'element_id' => $source->id,
-//            'message' => $message
-//        ]);
-
-    }
-    /**
-     * Handle the Source "saving" event.
-     *
-     * @param  \App\Models\Source  $source
-     * @return void
-     */
-    public function saving(Source $source)
-    {
-        //
-//        $message = '';
-//        dd($source);
-//        Logger::create([
-//            'user_id' => auth()->user()->id,
-//            'action' => 'add',
-//            'model_name' => 'Source',
-//            'element_id' => $source->id,
-//            'message' => $message
-//        ]);
-
+        new Log(auth()->user(), 'add', 'source', $source->id);
     }
 
     /**
@@ -54,7 +27,7 @@ class SourceObserver
      */
     public function updated(Source $source)
     {
-        //
+        new Log(auth()->user(), 'update', 'source', $source->id, $source->getDirty());
     }
 
     /**
@@ -65,7 +38,7 @@ class SourceObserver
      */
     public function deleted(Source $source)
     {
-        //
+        new Log(auth()->user(), 'delete', 'source', $source->id);
     }
 
     /**

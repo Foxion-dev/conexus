@@ -23,7 +23,7 @@
                 <div>{{  $deal->commission  }}</div>
                 <div>{{  $deal->return_sum }}</div>
                 <div>{{  $deal->client_id }}</div>
-                <div class="operations__item-actions actions">
+                <div class="operations__item-actions actions flex-body flex-no-wrap">
 {{--                    <a href="{{ route('deal.show', $deal->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-eye"></i></a>--}}
                     <a href="{{ route('deal.edit', $deal->id) }}"  class="actions__item actions__item--edit"><i class="fa-regular fa-pen-to-square"></i></a>
                     <a href="{{ route('deal.destroy', $deal->id) }}"  class="actions__item actions__item--del"><i class="fa-regular fa-trash-can"></i></a>
